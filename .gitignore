@@ -1,6 +1,6 @@
 .ipynb_checkpoints/
 *.csv
-*.png
+# *.png
 __pycache__/
 *.pyc
 .vscode/
