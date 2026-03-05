@@ -59,7 +59,6 @@ pip install pandas matplotlib numpy
 
 <br>
 <br>
-<br>
 
 # Development of Methodological Recommendations for the Integration of Artificial Intelligence Technologies into an Information Security Management System
 
