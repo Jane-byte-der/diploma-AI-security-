@@ -72,6 +72,18 @@ This repository contains the supplementary materials for a thesis on integrating
 - **Environment:** Jupyter Notebook for interactive exploration and reproducibility.
 - **Data:** Synthetic dataset mimicking privileged user behavior to ensure transparency and easy experimentation.
 
+## 📊 Implementation Results
+
+Comparison of information security system performance before and after the implementation of the developed methodological recommendations (based on data from Section 3.3.2 of the thesis).
+
+| Metric | Before AI | After AI | Change |
+|--------|-----------|----------|--------|
+| **Number of incidents per month** | 47 | 52 | ▲ +10% |
+| **Insider threats detected** | 3 | 8 | ▲ +166% |
+| **Average detection time** | 4.5 hours | 0.5 hours | ▼ -89% |
+| **False positive rate** | 94% | 67% | ▼ -27% |
+| **Incidents detected only by AI** | — | 6 | +6 |
+
 ## 📋 Sample Data (Table 3.2)
 
 A fragment of the synthetic dataset used for the analysis:
