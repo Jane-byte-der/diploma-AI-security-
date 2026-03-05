@@ -35,7 +35,9 @@ pip install pandas matplotlib numpy
 
 Автор: Воробьева Евгения Александровна
 
-
+<br>
+<br>
+<br>
 
 # Development of Methodological Recommendations for the Integration of Artificial Intelligence Technologies into an Information Security Management System
 
