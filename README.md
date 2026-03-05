@@ -48,9 +48,6 @@ This repository contains the supplementary materials for a thesis on integrating
     - **27% reduction in false positives** compared to traditional SIEM rules.
     - **89% faster incident detection time**, enabling more rapid response to potential threats.
 
-## 📊 Key Results
-![Comparison of traditional SIEM rules vs. the proposed AI-based methodology, showing a 27% reduction in false positives.](comparison_chart.png)
-
 ## 🛠 Implementation & Tech Stack
 - **Core Analysis:** Python (pandas, numpy, matplotlib, scikit-learn)
 - **Environment:** Jupyter Notebook for interactive exploration and reproducibility.
