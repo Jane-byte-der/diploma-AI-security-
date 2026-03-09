@@ -105,6 +105,20 @@ A fragment of the synthetic dataset used for the analysis:
 | 11.02.2026 22:10 | PETROV_BUH  | Accountant    | LOGIN       | FS-01                            | 10.10.2.10    |              | 0          |
 | 12.02.2026 08:55 | SIDOROV_DEV | Developer     | FILE_ACCESS | \\fs\\finance\\salaries.xlsx      | 10.10.3.15    | 2100.0       | 1          |
 
+## 🧠 Methodology Highlights
+
+This research includes both theoretical development and practical validation:
+
+- **Developed and validated** UEBA-based methodology for privileged user anomaly detection
+- **Created comprehensive anomaly typology** with 5 key types:
+  - *Temporal* — unusual working hours
+  - *Spatial* — access from unexpected locations
+  - *Resource* — access to unauthorized systems
+  - *Intensity* — abnormal data volumes
+  - *Behavioral* — unusual action sequences
+- **Experimental validation** on realistic enterprise dataset (Integra-Soft LLC)
+- **48 references** (2023-2026) including Russian and international research, GOST R ISO/IEC 27001 standards
+
 ## 📁 Repository Structure
 - `analysis_diploma.ipynb` - The main Jupyter Notebook containing the full data analysis pipeline, model training, and evaluation.
 - `requirements.txt` - A list of Python dependencies required to run the notebook.
