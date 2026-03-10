@@ -47,6 +47,27 @@ pip install pandas matplotlib numpy
 | 11.02.2026 22:10 | PETROV_BUH  | Бухгалтер     | LOGIN       | FS-01                            | 10.10.2.10    |              | 0          |
 | 12.02.2026 08:55 | SIDOROV_DEV | Разработчик   | FILE_ACCESS | \\fs\\finance\\salaries.xlsx      | 10.10.3.15    | 2100.0       | 1          |
 
+## 🚀 Веб-приложение
+
+Проект теперь включает **полноценный веб-интерфейс** для обнаружения аномалий в логах безопасности в реальном времени.
+
+### Локальный запуск
+
+```bash
+# Скачать репозиторий
+git clone https://github.com/Jane-byte-der/diploma-AI-security-.git
+cd diploma-AI-security-/ai-security-platform
+
+# Создать виртуальное окружение
+python3 -m venv venv
+source venv/bin/activate  # На Windows: venv\Scripts\activate
+
+# Установить зависимости
+pip install -r requirements.txt
+
+# Запустить приложение
+python3 backend/app.py
+
 ## 📌 О работе
 
 **Институт информационных наук**  
