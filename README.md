@@ -105,6 +105,27 @@ A fragment of the synthetic dataset used for the analysis:
 | 11.02.2026 22:10 | PETROV_BUH  | Accountant    | LOGIN       | FS-01                            | 10.10.2.10    |              | 0          |
 | 12.02.2026 08:55 | SIDOROV_DEV | Developer     | FILE_ACCESS | \\fs\\finance\\salaries.xlsx      | 10.10.3.15    | 2100.0       | 1          |
 
+## 🚀 Web Application
+
+This project now includes a **fully functional web interface** for real-time anomaly detection in security logs.
+
+### Local Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/Jane-byte-der/diploma-AI-security-.git
+cd diploma-AI-security-/ai-security-platform
+
+# Set up virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python3 backend/app.py
+
 ## 🧠 Methodology Highlights
 
 This research includes both theoretical development and practical validation:
