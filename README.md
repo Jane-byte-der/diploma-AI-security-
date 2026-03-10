@@ -125,6 +125,7 @@ pip install -r requirements.txt
 
 # Run the application
 python3 backend/app.py
+```
 
 ## 🧠 Methodology Highlights
 
