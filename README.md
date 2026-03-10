@@ -67,6 +67,7 @@ pip install -r requirements.txt
 
 # Запустить приложение
 python3 backend/app.py
+```
 
 ## 📌 О работе
 
