@@ -173,6 +173,30 @@ pip install -r requirements.txt
 python3 backend/app.py
 ```
 
+### Description
+
+The web application is built on a classic client-server architecture and includes the following components: Flask backend, anomaly detection module (`anomaly_detector.py`), clustering module (`profile_generator.py`), SQLite database for feedback storage, and frontend in HTML/CSS/JavaScript.
+
+**Features:**
+- 📁 **CSV file upload** with required columns validation
+- 👤 **Automatic user profiling** (typical working hours, IP addresses, data volumes)
+- 🔍 **Anomaly detection** by five types: temporal, spatial, resource, intensity, behavioral
+- 📊 **Interactive results table** with color-coded severity levels (high/medium/low/normal)
+- 🔄 **Human-in-the-loop feedback** with verdict options:
+  - 🚨 **Incident** — real security threat
+  - ⚠️ **Suspicious** — needs investigation
+  - ✅ **False Positive** — algorithm error
+- 💾 **Database storage** of all decisions in SQLite for future model retraining
+- 📥 **CSV export** of results for further analysis
+
+**Testing Results:**
+Testing on the synthetic dataset (Table 3.2) yielded the following results:
+- Successfully loaded and processed 10 security events
+- Built profiles for 3 users (IVANOV_ADM, PETROV_BUH, SIDOROV_DEV)
+- Detected 6 anomalies of varying severity
+- Implemented event labeling and feedback storage
+- Processing time under 1 second, confirming real-time capability
+
 ### Screenshots
 
 ![Anomaly Detection Results 1](ai-security-platform/frontend/IMG_4141.png)
