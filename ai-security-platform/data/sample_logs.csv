@@ -1,0 +1,11 @@
+Timestamp,User_ID,User_Role,Event_Type,Resource,IP_Address,Data_Size_KB,Is_Anomaly
+10.02.2026 09:15,IVANOV_ADM,Администратор,LOGIN,DC-01,10.10.1.5,,0
+10.02.2026 09:23,PETROV_BUH,Бухгалтер,FILE_ACCESS,\\fs\finance\report.docx,10.10.2.10,120,0
+10.02.2026 10:01,SIDOROV_DEV,Разработчик,DB_QUERY,test_db,10.10.3.15,45,0
+10.02.2026 03:02,IVANOV_ADM,Администратор,LOGIN,DC-01,185.124.33.12,,1
+10.02.2026 03:15,IVANOV_ADM,Администратор,DB_QUERY,customer_db,185.124.33.12,150000,1
+11.02.2026 14:30,PETROV_BUH,Бухгалтер,FILE_ACCESS,\\fs\develop\source_code,10.10.2.10,5,1
+11.02.2026 09:45,SMIRNOV_MGR,Менеджер,WEB_ACCESS,cloud-storage.ru/upload,10.10.5.20,25000,1
+11.02.2026 16:20,IVANOV_ADM,Администратор,FILE_ACCESS,\\fs\backup,10.10.1.5,500,0
+11.02.2026 22:10,PETROV_BUH,Бухгалтер,LOGIN,FS-01,10.10.2.10,,0
+12.02.2026 08:55,SIDOROV_DEV,Разработчик,FILE_ACCESS,\\fs\finance\salaries.xlsx,10.10.3.15,2100,1
