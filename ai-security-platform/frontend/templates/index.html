@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .upload-area {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px dashed #bdc3c7;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area:hover {
+            border-color: #3498db;
+        }
+        
+        input[type="file"] {
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .stat-card.high {
+            border-left-color: #e74c3c;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th {
+            background: #34495e;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .severity-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .severity-medium {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .severity-low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 AI-Powered Anomaly Detection System</h1>
+            <div class="subtitle">
+                Based on Vorobeva E.A. Bachelor's Thesis (MSLU, 2026)<br>
+                Research: Integration of AI into Information Security Management Systems
+            </div>
+        </header>
+        
+        <div class="upload-area" id="uploadArea">
+            <h2>Upload Security Logs (CSV format)</h2>
+            <p>File should contain columns: Timestamp, User_ID, User_Role, Event_Type, Resource, IP_Address</p>
+            <input type="file" id="fileInput" accept=".csv">
+            <button onclick="analyzeFile()" id="analyzeBtn">Analyze</button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing data... This may take a few moments</p>
+        </div>
+        
+        <div class="results" id="results" style="display: none;">
+            <h2>Analysis Results</h2>
+            
+            <div class="stats-grid" id="stats"></div>
+            
+            <h3>Detected Anomalies</h3>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>User</th>
+                        <th>Event Type</th>
+                        <th>Anomaly Types</th>
+                        <th>Severity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+            
+            <button onclick="downloadResults()" style="margin-top: 20px;">Download Results CSV</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentResults = [];
+        
+        async function analyzeFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a file');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('analyzeBtn').disabled = true;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                displayResults(data);
+                
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('analyzeBtn').disabled = false;
+            }
+        }
+        
+        function displayResults(data) {
+            document.getElementById('results').style.display = 'block';
+            
+            // Display statistics
+            const stats = data.statistics;
+            const statsHtml = `
+                <div class="stat-card">
+                    <div class="stat-value">${stats.total_events || 0}</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat-card high">
+                    <div class="stat-value">${stats.total_anomalies || 0}</div>
+                    <div class="stat-label">Anomalies Detected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.anomaly_rate || 0}%</div>
+                    <div class="stat-label">Anomaly Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${Object.keys(stats.by_user || {}).length || 0}</div>
+                    <div class="stat-label">Affected Users</div>
+                </div>
+            `;
+            document.getElementById('stats').innerHTML = statsHtml;
+            
+            // Display results table
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            data.results.forEach(result => {
+                const row = tbody.insertRow();
+                row.className = `severity-${result.severity}`;
+                
+                row.innerHTML = `
+                    <td>${result.timestamp}</td>
+                    <td>${result.user_id}</td>
+                    <td>${result.event_type}</td>
+                    <td>${result.anomaly_types}</td>
+                    <td>${result.severity}</td>
+                    <td>
+                        <select onchange="labelAnomaly(${result.id}, this.value)">
+                            <option value="">Select verdict</option>
+                            <option value="incident">🚨 Incident</option>
+                            <option value="suspicious">⚠️ Suspicious</option>
+                            <option value="false">✅ False Positive</option>
+                        </select>
+                    </td>
+                `;
+            });
+            
+            currentResults = data.results;
+        }
+        
+        async function labelAnomaly(id, verdict) {
+            const response = await fetch('/label', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    id: id,
+                    verdict: verdict,
+                    comment: ''
+                })
+            });
+            
+            if (response.ok) {
+                alert('Feedback saved! Thank you.');
+            }
+        }
+        
+        async function downloadResults() {
+            window.location.href = '/download_results';
+        }
+    </script>
+</body>
+</html>
