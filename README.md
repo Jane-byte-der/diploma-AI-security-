@@ -127,6 +127,12 @@ pip install -r requirements.txt
 python3 backend/app.py
 ```
 
+### Screenshots
+
+![Anomaly Detection Results 1](ai-security-platform/frontend/IMG_4141.png)
+
+![Anomaly Detection Results 2](ai-security-platform/frontend/IMG_4142.png)
+
 ## 🧠 Methodology Highlights
 
 This research includes both theoretical development and practical validation:
