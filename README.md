@@ -318,17 +318,30 @@ This research includes both theoretical development and practical validation:
 
 ## 📁 Repository Structure
 
+### Root files:
 - `analysis_diploma.ipynb` — Main Jupyter Notebook with complete data analysis
-- `requirements.txt` — Python dependencies
+- `requirements.txt` — Python dependencies for analysis
+- `runtime.txt` — Fixes Python version (3.12.8) for correct Render deployment
 - `.gitignore` — Git configuration file
 - `comparison_chart.png` — Performance comparison chart (before/after AI implementation)
 - `jupyter_analysis.png` — Additional plots from the analysis
 - `create_chart.py` — Script for generating the comparison chart
-- `ai-security-platform/` — Flask web application folder:
-  - `backend/` — Server-side (app.py, anomaly_detector.py, database.py, profile_generator.py)
-  - `frontend/` — User interface (HTML, CSS, JavaScript)
-  - `data/` — Synthetic test data (sample_logs.csv)
-  - `requirements.txt` — Web app dependencies
+
+### Web Application (`ai-security-platform/`):
+- **`backend/`** — Flask server-side
+  - `__init__.py` — Empty file that makes the folder a Python package (critical for imports!)
+  - `app.py` — Main Flask application file
+  - `anomaly_detector.py` — Anomaly detection module (system core)
+  - `database.py` — SQLite database operations for storing feedback
+  - `profile_generator.py` — User clustering module
+- **`frontend/`** — User interface
+  - `templates/index.html` — Main page
+  - `static/style.css` — Styles
+  - `static/script.js` — Client-side logic
+  - `static/IMG_4141.png` and `IMG_4142.png` — Screenshots of the working application
+- **`data/`** — Synthetic test data
+  - `sample_logs.csv` — Test dataset (Table 3.2 from the thesis)
+- **`requirements.txt`** — Web app dependencies (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
 
 ## 🚀 Getting Started
 
