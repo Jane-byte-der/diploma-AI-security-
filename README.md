@@ -258,6 +258,33 @@ Testing on the synthetic dataset (Table 3.2) yielded the following results:
 
 ![Anomaly Detection Results 2](ai-security-platform/frontend/IMG_4142.png)
 
+### Live Demo on Render
+
+A key outcome of the practical part of this thesis is the development and deployment of a **fully functional web application** for detecting anomalies in user behavior.
+
+#### 🔗 Live Application URL
+
+The application is available in real-time at:  
+👉 **[https://diploma-ai-security.onrender.com](https://diploma-ai-security.onrender.com)**
+
+#### ✨ Functionality
+
+This tool fully implements the methodology described in Chapter 3 of the thesis, enabling users to:
+
+1.  **Upload data** — accepts CSV files with information security logs (structure matches Table 3.2 from the dissertation).
+2.  **Automatically build user profiles** — based on historical data, the system defines "normal" behavior for each employee (as in Table 3.4).
+3.  **Detect anomalies** — the algorithm analyzes uploaded events and finds deviations from typical behavior based on temporal, spatial, and intensity parameters.
+4.  **Visualize results** — users see summary statistics (total events, number of anomalies, anomaly percentage) and a detailed table of each suspicious event, including its type and severity level.
+5.  **Provide Human-in-the-loop feedback** — the interface allows analysts to manually verify each anomaly by selecting a verdict (incident, suspicious, false positive). This data is saved and can be used for future model retraining.
+
+#### 🧠 Connection to the Thesis
+
+This live application is not just a demonstration prototype but a practical implementation of the study's key findings:
+
+*   **Confirmation of Table 3.6** — when loading the test dataset, the system detects anomalies with accuracy comparable to the results described in section 3.2.4.
+*   **Implementation of the "Human-in-the-loop" principle** — the built-in feedback mechanism directly corresponds to the organizational and personnel recommendations from section 2.3.1.
+*   **Proof of Effectiveness** — the publicly accessible service serves as undeniable evidence of the proposed methodology's viability and the correctness of the software code.
+
 ## 🧠 Methodology Highlights
 
 This research includes both theoretical development and practical validation:
