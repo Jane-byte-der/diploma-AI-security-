@@ -5,7 +5,7 @@ Part of Bachelor's Thesis
 """
 
 from flask import Flask, request, jsonify, render_template, send_file
-from anomaly_detector import AnomalyDetector
+from .anomaly_detector import AnomalyDetector
 import pandas as pd
 import os
 import json
