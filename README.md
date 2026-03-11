@@ -277,7 +277,17 @@ This tool fully implements the methodology described in Chapter 3 of the thesis,
 4.  **Visualize results** — users see summary statistics (total events, number of anomalies, anomaly percentage) and a detailed table of each suspicious event, including its type and severity level.
 5.  **Provide Human-in-the-loop feedback** — the interface allows analysts to manually verify each anomaly by selecting a verdict (incident, suspicious, false positive). This data is saved and can be used for future model retraining.
 
-#### 🧠 Connection to the Thesis
+#### 📸 Screenshots
+
+*Application interface after uploading and analyzing test data*
+
+![Main application screen](ai-security-platform/frontend/IMG_4141.png)
+*Figure 1. File upload and analysis results display*
+
+![Anomalies table](ai-security-platform/frontend/IMG_4142.png)
+*Figure 2. Detailed list of anomalies with verification options*
+
+#### 💡 Connection to the Thesis
 
 This live application is not just a demonstration prototype but a practical implementation of the study's key findings:
 
