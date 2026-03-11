@@ -16,10 +16,22 @@
   - `data/` — синтетические данные для тестирования (sample_logs.csv)
   - `requirements.txt` — зависимости для веб-приложения
 
-## Запуск
+## 🚀 Анализ данных в Jupyter Notebook
+
+### Запуск Jupyter Notebook
+
 ```bash
-pip install pandas matplotlib numpy
+# Скачать репозиторий
+git clone https://github.com/Jane-byte-der/diploma-AI-security-.git
+cd diploma-AI-security-
+
+# Установить зависимости
+pip install -r requirements.txt
+
+# Запустить Jupyter
+jupyter notebook analysis_diploma.ipynb
 ```
+
 ## 📊 Результаты внедрения
 
 В таблице представлено сравнение эффективности работы системы информационной безопасности до и после внедрения разработанных методических рекомендаций (на основе данных из параграфа 3.3.2 дипломной работы).
