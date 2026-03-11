@@ -224,12 +224,18 @@ This research includes both theoretical development and practical validation:
 - **48 references** (2023-2026) including Russian and international research, GOST R ISO/IEC 27001 standards
 
 ## 📁 Repository Structure
-- `analysis_diploma.ipynb` - The main Jupyter Notebook containing the full data analysis pipeline, model training, and evaluation.
-- `requirements.txt` - A list of Python dependencies required to run the notebook.
-- `create_chart.py` - A standalone Python script to regenerate the comparison chart.
-- `comparison_chart.png` - The generated comparison chart image used in this README.
-- `jupyter_analysis.png` - Additional plots and visualizations from the analysis.
-- `.gitignore` - Specifies intentionally untracked files to ignore.
+
+- `analysis_diploma.ipynb` — Main Jupyter Notebook with complete data analysis
+- `requirements.txt` — Python dependencies
+- `.gitignore` — Git configuration file
+- `comparison_chart.png` — Performance comparison chart (before/after AI implementation)
+- `jupyter_analysis.png` — Additional plots from the analysis
+- `create_chart.py` — Script for generating the comparison chart
+- `ai-security-platform/` — Flask web application folder:
+  - `backend/` — Server-side (app.py, anomaly_detector.py, database.py, profile_generator.py)
+  - `frontend/` — User interface (HTML, CSS, JavaScript)
+  - `data/` — Synthetic test data (sample_logs.csv)
+  - `requirements.txt` — Web app dependencies
 
 ## 🚀 Getting Started
 
