@@ -252,12 +252,6 @@ Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Implemented event labeling and feedback storage
 - Processing time under 1 second, confirming real-time capability
 
-### Screenshots
-
-![Anomaly Detection Results 1](ai-security-platform/frontend/IMG_4141.png)
-
-![Anomaly Detection Results 2](ai-security-platform/frontend/IMG_4142.png)
-
 ### Live Demo on Render
 
 A key outcome of the practical part of this thesis is the development and deployment of a **fully functional web application** for detecting anomalies in user behavior.
