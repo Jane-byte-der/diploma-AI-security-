@@ -137,7 +137,7 @@ class AnomalyDetector:
         for user in df['User_ID'].unique():
             user_data = df[df['User_ID'] == user]
             
-            if len(user_data) < 10:  # Минимум данных для профиля
+            if len(user_data) < 2:  # Минимум данных для профиля
                 logger.warning(f"Мало данных для пользователя {user}, пропускаем")
                 continue
             
