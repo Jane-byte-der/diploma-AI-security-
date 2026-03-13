@@ -265,7 +265,7 @@ Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Implemented event labeling and feedback storage
 - Processing time under 1 second, confirming real-time capability
 
-### Live Demo on Render
+## ☁️ Cloud Deployment (Render)
 
 A key outcome of the practical part of the thesis was the development of a **fully functional web application** and its deployment in a cloud environment. The application is available for testing without the need for local installation.
 
