@@ -202,10 +202,6 @@ Comparison of information security system performance before and after the imple
 | **False positive rate** | 94% | 67% | ▼ -27% |
 | **Incidents detected only by AI** | — | 6 | +6 |
 
-## 📈 Results Visualization
-
-![Before vs After Comparison](comparison_chart.png)
-
 ## 📋 Sample Data (Table 3.2)
 
 A fragment of the synthetic dataset used for the analysis:
