@@ -176,7 +176,7 @@ python3 backend/app.py
 
 # Development of Methodological Recommendations for the Integration of Artificial Intelligence Technologies into an Information Security Management System
 
-This repository contains the supplementary materials for a thesis on integrating AI into Information Security Management Systems (ISMS). The core component is a Jupyter Notebook designed for data analysis and anomaly detection in privileged user behavior.
+This repository contains the materials developed during the Bachelor's thesis on integrating Artificial Intelligence into Information Security Management Systems (ISMS). It includes an analytical module based on Jupyter Notebook implementing anomaly detection algorithms, a Flask web application providing interactive access to the functionality, as well as synthetic test data, scripts, charts, and complete documentation. Detailed structure and setup instructions are provided in the relevant sections.
 
 ## 🔬 Research Overview
 - **Objective:** Develop a novel methodology for integrating AI into security operations.
