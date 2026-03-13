@@ -346,6 +346,38 @@
         async function downloadResults() {
             window.location.href = '/download_results';
         }
+        
+        // Load example dataset with one click
+        async function loadExample() {
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('exampleBtn').disabled = true;
+
+            try {
+                // Fetch the sample CSV from GitHub
+                const response = await fetch('https://raw.githubusercontent.com/Jane-byte-der/diploma-AI-security-/main/ai-security-platform/data/sample_logs.csv');
+                const csvText = await response.text();
+
+                // Create a file from the text
+                const file = new File([csvText], 'sample_logs.csv', { type: 'text/csv' });
+
+                // Set it as the selected file
+                const fileInput = document.getElementById('fileInput');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+
+                // Trigger analysis
+                await analyzeFile();
+
+            } catch (error) {
+                alert('Error loading example: ' + error.message);
+            } finally {
+                document.getElementById('exampleBtn').disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
