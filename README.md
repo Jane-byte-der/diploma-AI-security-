@@ -267,7 +267,7 @@ Testing on the synthetic dataset (Table 3.2) yielded the following results:
 
 ### Live Demo on Render
 
-A key outcome of the practical part of this thesis is the development and deployment of a **fully functional web application** for detecting anomalies in user behavior.
+A key outcome of the practical part of the thesis was the development of a **fully functional web application** and its deployment in a cloud environment. The application is available for testing without the need for local installation.
 
 #### 🔗 Live Application URL
 
