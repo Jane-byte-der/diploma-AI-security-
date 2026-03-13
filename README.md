@@ -375,6 +375,12 @@ The full text of the Bachelor's thesis (in Russian) is available here:
 
 ## 📌 About
 
-This repository was created as part of the final qualification work at Moscow State Linguistic University (MSLU), 2026.
+**Institute of Information Sciences**  
+**Department of International Information Security**  
+**Programme: 10.03.01 — Information Security**
+
+This repository was created as part of the Bachelor's thesis on  
+*"Development of Methodological Recommendations for the Integration of Artificial Intelligence Technologies into an Information Security Management System"*  
+(Moscow State Linguistic University, 2026).
 
 **Author:** Evgeniia Vorobeva
