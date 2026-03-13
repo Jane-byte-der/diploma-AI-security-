@@ -260,6 +260,9 @@ The web application is built on a classic client-server architecture and include
 - 💾 **Database storage** of all decisions in SQLite for future model retraining
 - 📥 **CSV export** of results for further analysis
 
+**Additional feature:**
+- ▶️ **"Load Example" button** — loads the test dataset with one click, allowing instant testing of the application without the need to download files.
+
 **Testing Results:**
 Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Successfully loaded and processed 10 security events
