@@ -370,7 +370,8 @@ This research addresses the critical cybersecurity challenge of detecting inside
 
 ## 📄 Thesis
 
-The full thesis (in Russian) is available here: [link to PDF]
+The full text of the Bachelor's thesis (in Russian) is available here:  
+[📥 Download PDF](vorobeva_thesis_2026.pdf)
 
 ## 📌 About
 
