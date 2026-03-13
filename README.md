@@ -219,7 +219,7 @@ A fragment of the synthetic dataset used for the analysis:
 | 11.02.2026 22:10 | PETROV_BUH  | Accountant    | LOGIN       | FS-01                            | 10.10.2.10    |              | 0          |
 | 12.02.2026 08:55 | SIDOROV_DEV | Developer     | FILE_ACCESS | \\fs\\finance\\salaries.xlsx      | 10.10.3.15    | 2100.0       | 1          |
 
-## 🚀 Web Application
+## 💻 Web Application
 
 This project now includes a **fully functional web interface** for real-time anomaly detection in security logs.
 
