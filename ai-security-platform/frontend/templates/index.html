@@ -487,6 +487,66 @@ function drawTimeline(events) {
             container.style.display = 'block';
         }
 
+function drawCharts(events) {
+            const container = document.getElementById('charts-container');
+            if (!container) return;
+            
+            // Считаем статистику
+            const userCounts = {};
+            const typeCounts = {};
+            
+            events.forEach(event => {
+                // По пользователям
+                userCounts[event.user_id] = (userCounts[event.user_id] || 0) + 1;
+                
+                // По типам аномалий
+                if (event.anomaly_types && event.anomaly_types !== 'none') {
+                    const types = event.anomaly_types.split(',');
+                    types.forEach(t => {
+                        t = t.trim();
+                        if (t) typeCounts[t] = (typeCounts[t] || 0) + 1;
+                    });
+                }
+            });
+            
+            // График по пользователям
+            const userCtx = document.getElementById('userChart')?.getContext('2d');
+            if (userCtx) {
+                new Chart(userCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(userCounts),
+                        datasets: [{
+                            label: 'Events by User',
+                            data: Object.values(userCounts),
+                            backgroundColor: '#3498db'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+            
+            // График по типам аномалий
+            const typeCtx = document.getElementById('typeChart')?.getContext('2d');
+            if (typeCtx && Object.keys(typeCounts).length > 0) {
+                new Chart(typeCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(typeCounts),
+                        datasets: [{
+                            data: Object.values(typeCounts),
+                            backgroundColor: ['#ff6b6b', '#f39c12', '#3498db', '#2ecc71', '#9b59b6']
+                        }]
+                    }
+                });
+            }
+            
+            container.style.display = 'block';
+        }
+
         async function labelAnomaly(id, verdict) {
             const response = await fetch('/label', {
                 method: 'POST',
