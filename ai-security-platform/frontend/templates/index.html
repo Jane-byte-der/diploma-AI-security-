@@ -379,7 +379,7 @@
         }
         
         // Timeline visualization function
-        function drawTimeline(events) {
+function drawTimeline(events) {
             const container = document.getElementById('timeline-container');
             const timelineDiv = document.getElementById('timeline');
             
@@ -423,6 +423,33 @@
                 
                 hourDiv.title = `Hour ${i}: ${hours[i].total} events, ${hours[i].anomalies} anomalies`;
                 timelineDiv.appendChild(hourDiv);
+            }
+            
+            // Generate text summary
+            const anomalyHours = [];
+            const anomalyDetails = [];
+            for (let i = 0; i < 24; i++) {
+                if (hours[i].anomalies > 0) {
+                    anomalyHours.push(i);
+                    anomalyDetails.push(`${i}:00 (${hours[i].anomalies} anomalies)`);
+                }
+            }
+            
+            let summaryText = '';
+            if (anomalyHours.length > 0) {
+                if (anomalyHours.length === 1) {
+                    summaryText = `⚠️ Anomalies detected at ${anomalyHours[0]}:00 — ${hours[anomalyHours[0]].anomalies} event(s)`;
+                } else {
+                    const hourList = anomalyDetails.join(', ');
+                    summaryText = `⚠️ Anomalies detected at: ${hourList}`;
+                }
+            } else {
+                summaryText = '✅ No anomalies detected';
+            }
+            
+            const summaryElement = document.getElementById('timeline-summary');
+            if (summaryElement) {
+                summaryElement.textContent = summaryText;
             }
             
             container.style.display = 'block';
