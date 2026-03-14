@@ -253,10 +253,31 @@
             </table>
             
             <button onclick="downloadResults()" style="margin-top: 20px;">Download Results CSV</button>
-            <div id="timeline-container" style="margin-top: 30px; display: none;">
+<div id="timeline-container" style="margin-top: 30px; display: none;">
                 <h3>Timeline of Events (by hour)</h3>
-                <div id="timeline"></div>
-                <p style="font-size: 12px; color: #666; margin-top: 5px;">Hover over blocks for details. Red/pink blocks indicate hours with anomalies.</p>
+                
+                <!-- Легенда -->
+                <div style="display: flex; gap: 15px; margin-bottom: 10px; font-size: 12px;">
+                    <span><span style="display: inline-block; width: 12px; height: 12px; background-color: #ff6b6b; border-radius: 2px; margin-right: 4px;"></span> Anomalies</span>
+                    <span><span style="display: inline-block; width: 12px; height: 12px; background-color: #3498db; border-radius: 2px; margin-right: 4px;"></span> Normal</span>
+                    <span><span style="display: inline-block; width: 12px; height: 12px; background-color: #ecf0f1; border-radius: 2px; margin-right: 4px;"></span> No events</span>
+                </div>
+                
+                <!-- Контейнер для часов и блоков -->
+                <div style="display: flex; align-items: flex-end;">
+                    <!-- Подписи часов (слева) -->
+                    <div style="display: flex; flex-direction: column; margin-right: 10px; font-size: 10px; color: #666; text-align: right;">
+                        <div>0</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+                        <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
+                        <div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div>
+                    </div>
+                    
+                    <!-- Блоки таймлайна -->
+                    <div id="timeline" style="display: flex; flex-wrap: wrap; width: 100%;"></div>
+                </div>
+                
+                <!-- Сводка -->
+                <p id="timeline-summary" style="font-size: 13px; color: #333; margin-top: 10px; font-weight: 500;"></p>
             </div>
         </div>
     </div>
