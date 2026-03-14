@@ -354,8 +354,59 @@
             });
             
             currentResults = data.results;
+            drawTimeline(data.results);
         }
         
+        // Timeline visualization function
+        function drawTimeline(events) {
+            const container = document.getElementById('timeline-container');
+            const timelineDiv = document.getElementById('timeline');
+            
+            // Clear old timeline
+            timelineDiv.innerHTML = '';
+            
+            // Group by hour
+            const hours = Array(24).fill().map(() => ({ total: 0, anomalies: 0 }));
+            
+            events.forEach(event => {
+                // Extract hour from timestamp (format: "10.02.2026 09:15")
+                const hour = parseInt(event.timestamp.split(' ')[1].split(':')[0]);
+                if (!isNaN(hour) && hour >= 0 && hour < 24) {
+                    hours[hour].total++;
+                    if (event.is_anomaly) {
+                        hours[hour].anomalies++;
+                    }
+                }
+            });
+            
+            // Render
+            for (let i = 0; i < 24; i++) {
+                const hourDiv = document.createElement('div');
+                hourDiv.className = 'timeline-hour';
+                
+                if (hours[i].total > 0) {
+                    const anomalyRatio = hours[i].anomalies / hours[i].total;
+                    // Red for anomalies, blue for normal
+                    if (anomalyRatio > 0) {
+                        const intensity = Math.min(anomalyRatio * 2, 1);
+                        hourDiv.style.backgroundColor = `rgba(255, ${Math.floor(200 * (1 - intensity))}, ${Math.floor(200 * (1 - intensity))}, 0.9)`;
+                        if (anomalyRatio > 0.3) {
+                            hourDiv.classList.add('animate-point');
+                        }
+                    } else {
+                        hourDiv.style.backgroundColor = '#3498db';
+                    }
+                } else {
+                    hourDiv.style.backgroundColor = '#ecf0f1';
+                }
+                
+                hourDiv.title = `Hour ${i}: ${hours[i].total} events, ${hours[i].anomalies} anomalies`;
+                timelineDiv.appendChild(hourDiv);
+            }
+            
+            container.style.display = 'block';
+        }
+
         async function labelAnomaly(id, verdict) {
             const response = await fetch('/label', {
                 method: 'POST',
