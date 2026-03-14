@@ -393,10 +393,27 @@ function drawTimeline(events) {
                 }
             });
             
-            // Render
+// Render — теперь каждый час в отдельной строке
             for (let i = 0; i < 24; i++) {
+                // Создаём строку для часа
+                const hourRow = document.createElement('div');
+                hourRow.style.display = 'flex';
+                hourRow.style.alignItems = 'center';
+                hourRow.style.marginBottom = '4px';
+                
+                // Подпись часа
+                const hourLabel = document.createElement('div');
+                hourLabel.style.width = '30px';
+                hourLabel.style.fontSize = '10px';
+                hourLabel.style.color = '#666';
+                hourLabel.style.textAlign = 'right';
+                hourLabel.style.marginRight = '10px';
+                hourLabel.textContent = i;
+                
+                // Блок для этого часа
                 const hourDiv = document.createElement('div');
                 hourDiv.className = 'timeline-hour';
+                hourDiv.style.width = '40px'; // фиксированная ширина для наглядности
                 
                 if (hours[i].total > 0) {
                     const anomalyRatio = hours[i].anomalies / hours[i].total;
@@ -415,7 +432,11 @@ function drawTimeline(events) {
                 }
                 
                 hourDiv.title = `Hour ${i}: ${hours[i].total} events, ${hours[i].anomalies} anomalies`;
-                timelineDiv.appendChild(hourDiv);
+                
+                // Собираем строку
+                hourRow.appendChild(hourLabel);
+                hourRow.appendChild(hourDiv);
+                timelineDiv.appendChild(hourRow);
             }
             
             // Generate text summary
