@@ -255,6 +255,21 @@
             </table>
             
             <button onclick="downloadResults()" style="margin-top: 20px;">Download Results CSV</button>
+            
+            <!-- НОВЫЙ БЛОК: графики -->
+            <div id="charts-container" style="margin-top: 30px; display: none;">
+                <h3>Anomaly Analytics</h3>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <canvas id="userChart" width="300" height="200"></canvas>
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <canvas id="typeChart" width="300" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            
 <div id="timeline-container" style="margin-top: 30px; display: none;">
                 <h3>Timeline of Events (by hour)</h3>
                 
