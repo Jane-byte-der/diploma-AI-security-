@@ -279,14 +279,21 @@ The web application is built on a classic client-server architecture and include
 **Additional feature:**
 - ▶️ **"Load Example" button** — loads the test dataset with one click, allowing instant testing of the application without the need to download files.
 
-**Event visualization:**
-- 📊 **Interactive timeline** — each hour displayed as an individual block
-- 🎨 **Color-coded indicators**:
-  - 🔴 red — anomalous activity detected
-  - 🔵 blue — normal operation
-  - ⚪ gray — no events recorded
-- ⚡ **Dynamic highlighting** — hours with high anomaly concentration feature pulsating animation
-- 📋 **Automated summary** — below the timeline, a concise list of hours with detected anomalies
+**🌈Event visualization**
+
+  **Analytics charts:**
+  - 📊 **Bar chart** — event distribution by user
+  - 🥧 **Pie chart** — types of detected anomalies (temporal, spatial, intensity, etc.)
+  - 📈 Charts are generated automatically after each analysis and update in real time
+
+  **Timeline:**
+  - 📊 **Interactive timeline** — each hour displayed as an individual block
+  - 🎨 **Color-coded indicators**:
+    - 🔴 red — anomalous activity detected
+    - 🔵 blue — normal operation
+    - ⚪ gray — no events recorded
+  - ⚡ **Dynamic highlighting** — hours with high anomaly concentration feature pulsating animation
+  - 📋 **Automated summary** — below the timeline, a concise list of hours with detected anomalies
 
 **Testing Results:**
 Testing on the synthetic dataset (Table 3.2) yielded the following results:
