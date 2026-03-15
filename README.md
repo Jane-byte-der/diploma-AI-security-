@@ -174,16 +174,16 @@ python3 backend/app.py
 
 *Интерфейс приложения после загрузки и анализа тестовых данных*
 
-![Главный экран приложения](ai-security-platform/frontend/IMG_4413.png)
+![Главный экран приложения](ai-security-platform/frontend/templates/IMG_4413.png)
 *Рисунок 1. Загрузка файла и отображение результатов анализа*
 
-![Таблица с найденными аномалиями](ai-security-platform/frontend/IMG_4414.png)
+![Таблица с найденными аномалиями](ai-security-platform/frontend/templates/IMG_4414.png)
 *Рисунок 2. Детальный список аномалий с возможностью верификации*
 
-![Аналитические графики](ai-security-platform/frontend/IMG_4415.png)
+![Аналитические графики](ai-security-platform/frontend/templates/IMG_4415.png)
 *Рисунок 3. Аналитические графики (столбчатая и круговая диаграммы)*
 
-![Интерактивный таймлайн](ai-security-platform/frontend/IMG_4420.png)
+![Интерактивный таймлайн](ai-security-platform/frontend/templates/IMG_4420.png)
 *Рисунок 4. Таймлайн с почасовой привязкой и цветовым кодированием*
 
 ### 🧠 Соответствие дипломной работе
