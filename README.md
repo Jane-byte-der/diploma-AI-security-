@@ -193,7 +193,7 @@ python3 backend/app.py
 ![Интерактивный таймлайн](ai-security-platform/frontend/templates/IMG_4420.png)
 *Рисунок 4. Таймлайн с почасовой привязкой и цветовым кодированием*
 
-![Панель уведомлений](ai-security-platform/frontend/templates/IMG_4433.png)
+![Панель уведомлений](ai-security-platform/frontend/templates/IMG_4434.png)
 *Рисунок 5. Панель уведомлений с цветовой индикацией событий*
 
 ### 🧠 Соответствие дипломной работе
