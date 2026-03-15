@@ -251,5 +251,31 @@ def download_pdf():
     
     return send_file(buffer, as_attachment=True, download_name='anomaly_report.pdf', mimetype='application/pdf')
 
+@app.route('/notifications')
+def get_notifications():
+    """Get recent notifications"""
+    conn = sqlite3.connect('data/feedback.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT timestamp, level, user_id, message, details 
+        FROM notifications 
+        ORDER BY id DESC 
+        LIMIT 10
+    ''')
+    rows = cursor.fetchall()
+    conn.close()
+    
+    notifications = []
+    for row in rows:
+        notifications.append({
+            'timestamp': row[0],
+            'level': row[1],
+            'user_id': row[2],
+            'message': row[3],
+            'details': row[4]
+        })
+    
+    return jsonify(notifications)
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
