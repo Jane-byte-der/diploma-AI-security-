@@ -10,6 +10,16 @@ import pandas as pd
 import os
 import json
 from datetime import datetime
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.lib.utils import ImageReader
+import matplotlib.pyplot as plt
+from collections import Counter
+import io
+import os
 
 app = Flask(__name__, 
             template_folder='../frontend/templates',
