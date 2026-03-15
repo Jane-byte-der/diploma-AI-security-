@@ -377,6 +377,9 @@ This tool fully implements the methodology described in Chapter 3 of the thesis,
 ![Interactive timeline](ai-security-platform/frontend/templates/IMG_4420.png)
 *Figure 4. Interactive timeline with hourly granularity and color coding*
 
+![Notifications panel](ai-security-platform/frontend/templates/IMG_4434.png)
+*Figure 5. Notifications panel with color-coded events*
+
 #### 💡 Connection to the Thesis
 
 This live application is not just a demonstration prototype but a practical implementation of the study's key findings:
