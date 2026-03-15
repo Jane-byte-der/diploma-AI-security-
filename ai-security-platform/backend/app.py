@@ -216,9 +216,9 @@ def download_pdf():
     anomalies = len(current_results[current_results['is_anomaly'] == True])
     normal = total - anomalies
     
-    story.append(Paragraph(f"📊 Total events: {total}", stats_style))
-    story.append(Paragraph(f"🔴 Anomalies detected: {anomalies}", stats_style))
-    story.append(Paragraph(f"🟢 Normal events: {normal}", stats_style))
+    story.append(Paragraph(f"Total events: {total}", stats_style))
+    story.append(Paragraph(f"Anomalies detected: {anomalies}", stats_style))
+    story.append(Paragraph(f"Normal events: {normal}", stats_style))
     story.append(Spacer(1, 0.2*inch))
     
     # Таблица
