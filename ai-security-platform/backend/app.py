@@ -244,6 +244,8 @@ def download_pdf():
         ])
     
     table = Table(table_data)
+    
+    # Сначала стиль для заголовка
     table.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#34495e')),
         ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
@@ -251,9 +253,31 @@ def download_pdf():
         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
         ('FONTSIZE', (0,0), (-1,0), 12),
         ('BOTTOMPADDING', (0,0), (-1,0), 12),
-        ('BACKGROUND', (0,1), (-1,-1), colors.HexColor('#f8f9fa')),
+    ]))
+    
+    # Цвета для строк с данными
+    for i, row in enumerate(table_data):
+        if i == 0:  # пропускаем заголовок
+            continue
+        severity = row[4]  # столбец Severity
+        if '🔴' in severity:
+            bg_color = colors.HexColor('#ffebee')
+        elif '🟡' in severity:
+            bg_color = colors.HexColor('#fff3e0')
+        elif '🟢' in severity:
+            bg_color = colors.HexColor('#e8f5e9')
+        else:
+            bg_color = colors.white
+        
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0,i), (-1,i), bg_color)
+        ]))
+    
+    # Сетка
+    table.setStyle(TableStyle([
         ('GRID', (0,0), (-1,-1), 1, colors.HexColor('#bdc3c7'))
     ]))
+    
     story.append(table)
     
     # # Графики
