@@ -268,19 +268,6 @@ def download_pdf():
     
     story.append(table)
     
-    # Графики
-    img_path = save_charts_to_image()
-    if img_path and os.path.exists(img_path):
-        story.append(Spacer(1, 0.3*inch))
-        story.append(Paragraph("📈 Analytics Charts", styles['Heading2']))
-        story.append(Spacer(1, 0.1*inch))
-        img = Image(img_path, width=6*inch, height=2.5*inch)
-        story.append(img)
-        try:
-            os.remove(img_path)
-        except:
-            pass
-    
     doc.build(story)
     buffer.seek(0)
     
