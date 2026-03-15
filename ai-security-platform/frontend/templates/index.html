@@ -681,6 +681,53 @@ function drawCharts(events) {
                 document.getElementById('exampleBtn').disabled = false;
             }
         }
+        
+        // Load notifications
+async function loadNotifications() {
+    try {
+        const response = await fetch('/notifications');
+        const notifications = await response.json();
+        
+        const list = document.getElementById('notifications-list');
+        if (!list) return;
+        
+        list.innerHTML = '';
+        
+        notifications.forEach(n => {
+            const div = document.createElement('div');
+            div.className = `notification ${n.level || 'system'}`;
+            
+            // Format time
+            const timeStr = n.timestamp ? new Date(n.timestamp).toLocaleTimeString() : '';
+            
+            let html = `
+                <div style="display: flex; justify-content: space-between;">
+                    <span class="notification-time">${timeStr}</span>
+                    <span class="notification-level">${n.level?.toUpperCase() || 'SYSTEM'}</span>
+                </div>
+                <div class="notification-message">${n.message}</div>
+            `;
+            
+            if (n.details) {
+                html += `<div class="notification-details">${n.details}</div>`;
+            }
+            if (n.user_id) {
+                html += `<div class="notification-details">User: ${n.user_id}</div>`;
+            }
+            
+            div.innerHTML = html;
+            list.appendChild(div);
+        });
+    } catch (error) {
+        console.error('Error loading notifications:', error);
+    }
+}
+
+// Load notifications every 5 seconds
+setInterval(loadNotifications, 5000);
+
+// Load immediately when page loads
+loadNotifications();
     </script>
 </body>
 </html>
