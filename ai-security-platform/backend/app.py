@@ -225,15 +225,7 @@ def download_pdf():
     table_data = [['Timestamp', 'User', 'Event', 'Anomaly Types', 'Severity']]
     for _, row in current_results.head(20).iterrows():
         severity = row['severity']
-        # Эмодзи для наглядности
-        if severity == 'high':
-            severity_display = '🔴 high'
-        elif severity == 'medium':
-            severity_display = '🟡 medium'
-        elif severity == 'normal':
-            severity_display = '🟢 normal'
-        else:
-            severity_display = severity
+        severity_display = severity
             
         table_data.append([
             row['timestamp'],
