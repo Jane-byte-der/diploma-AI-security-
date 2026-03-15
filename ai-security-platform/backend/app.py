@@ -247,16 +247,16 @@ def download_pdf():
         ('BOTTOMPADDING', (0,0), (-1,0), 12),
     ]))
     
-    # Цвета для строк с данными
+    ## Цвета для строк с данными
     for i, row in enumerate(table_data):
         if i == 0:  # пропускаем заголовок
             continue
-        severity = row[4]  # столбец Severity
-        if '🔴' in severity:
+        severity_value = row[4]  # столбец Severity
+        if severity_value == 'high':
             bg_color = colors.HexColor('#ffebee')
-        elif '🟡' in severity:
+        elif severity_value == 'medium':
             bg_color = colors.HexColor('#fff3e0')
-        elif '🟢' in severity:
+        elif severity_value == 'normal':
             bg_color = colors.HexColor('#e8f5e9')
         else:
             bg_color = colors.white
