@@ -303,6 +303,14 @@ The web application is built on a classic client-server architecture and include
   - ⚡ **Dynamic highlighting** — hours with high anomaly concentration feature pulsating animation
   - 📋 **Automated summary** — below the timeline, a concise list of hours with detected anomalies
 
+**Report export:**
+- 📄 **PDF report** — generates a document with statistics and an anomaly table (first 20 records)
+- 🎨 Row color coding is built-in:
+  - 🔴 red — high severity
+  - 🟡 yellow — medium severity
+  - 🟢 green — normal
+- The report is downloaded with one click via the «📄 Download PDF Report» button
+
 **Testing Results:**
 Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Successfully loaded and processed 10 security events
