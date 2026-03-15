@@ -89,6 +89,19 @@ def analyze():
         results = detector.detect_anomalies(df)
         current_results = results
         
+# Add notifications for anomalies
+        anomalies_df = results[results['is_anomaly'] == True]
+        for _, row in anomalies_df.iterrows():
+            level = row['severity']
+            user = row['user_id']
+            anom_types = row['anomaly_types']
+            details = f"IP: {row['ip_address']}"
+            add_notification(level, user, f"Anomaly: {anom_types}", details)
+        
+        # Add system notification
+        add_notification('info', None, f"Analysis complete", 
+                        f"{len(results)} events, {len(anomalies_df)} anomalies")
+
         # Получаем статистику
         stats = detector.get_statistics(results)
         
