@@ -37,6 +37,26 @@ def add_notification(level, user_id, message, details=""):
     conn.commit()
     conn.close()
 
+# Initialize notifications table
+def init_notifications_table():
+    conn = sqlite3.connect('data/feedback.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS notifications (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT,
+            level TEXT,
+            user_id TEXT,
+            message TEXT,
+            details TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# Call it when app starts
+init_notifications_table()
+
 @app.route('/')
 def index():
     """Главная страница"""
