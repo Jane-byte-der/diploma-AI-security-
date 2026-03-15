@@ -105,5 +105,64 @@ def health():
     """Проверка работоспособности"""
     return jsonify({'status': 'ok', 'message': 'Anomaly Detector is running'})
 
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import inch
+import io
+
+@app.route('/download_pdf')
+def download_pdf():
+    global current_results
+    if current_results is None:
+        return jsonify({'error': 'No results to export'}), 404
+    
+    # Создаём PDF в памяти
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    styles = getSampleStyleSheet()
+    story = []
+    
+    # Заголовок
+    story.append(Paragraph("Anomaly Detection Report", styles['Title']))
+    story.append(Spacer(1, 0.2*inch))
+    
+    # Статистика
+    stats = current_results['is_anomaly'].value_counts()
+    story.append(Paragraph(f"Total events: {len(current_results)}", styles['Normal']))
+    story.append(Paragraph(f"Anomalies detected: {stats.get(True, 0)}", styles['Normal']))
+    story.append(Paragraph(f"Normal events: {stats.get(False, 0)}", styles['Normal']))
+    story.append(Spacer(1, 0.2*inch))
+    
+    # Таблица
+    table_data = [['Timestamp', 'User', 'Event', 'Anomaly Types', 'Severity']]
+    for _, row in current_results.head(20).iterrows():
+        table_data.append([
+            row['timestamp'],
+            row['user_id'],
+            row['event_type'],
+            row['anomaly_types'],
+            row['severity']
+        ])
+    
+    table = Table(table_data)
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), colors.grey),
+        ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
+        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0,0), (-1,0), 12),
+        ('BOTTOMPADDING', (0,0), (-1,0), 12),
+        ('BACKGROUND', (0,1), (-1,-1), colors.beige),
+        ('GRID', (0,0), (-1,-1), 1, colors.black)
+    ]))
+    story.append(table)
+    
+    doc.build(story)
+    buffer.seek(0)
+    
+    return send_file(buffer, as_attachment=True, download_name='anomaly_report.pdf', mimetype='application/pdf')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
