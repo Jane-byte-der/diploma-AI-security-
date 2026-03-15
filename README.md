@@ -324,6 +324,13 @@ The web application is built on a classic client-server architecture and include
   - 🟢 green — normal
 - The report is downloaded with one click via the «📄 Download PDF Report» button
 
+**Event monitoring:**
+- 📨 **Notifications panel** — displays recent system events in real time
+  - 🔴 Red notifications — critical anomalies (high)
+  - 🟡 Yellow notifications — suspicious activity (medium)
+  - 🟢 Green notifications — informational messages (info)
+- Notifications update automatically every 5 seconds
+
 **Testing Results:**
 Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Successfully loaded and processed 10 security events
