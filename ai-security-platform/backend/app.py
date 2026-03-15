@@ -115,13 +115,6 @@ def health():
     """Проверка работоспособности"""
     return jsonify({'status': 'ok', 'message': 'Anomaly Detector is running'})
 
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.units import inch
-import io
-
 def save_charts_to_image():
     """Сохраняет текущие графики во временный файл и возвращает путь"""
     if current_results is None:
@@ -195,46 +188,86 @@ def download_pdf():
     if current_results is None:
         return jsonify({'error': 'No results to export'}), 404
     
-    # Создаём PDF в памяти
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=A4)
     styles = getSampleStyleSheet()
     story = []
     
     # Заголовок
-    story.append(Paragraph("Anomaly Detection Report", styles['Title']))
-    story.append(Spacer(1, 0.2*inch))
+    title_style = ParagraphStyle(
+        'CustomTitle',
+        parent=styles['Title'],
+        fontSize=18,
+        textColor=colors.HexColor('#2c3e50'),
+        spaceAfter=20
+    )
+    story.append(Paragraph("Anomaly Detection Report", title_style))
     
     # Статистика
-    stats = current_results['is_anomaly'].value_counts()
-    story.append(Paragraph(f"Total events: {len(current_results)}", styles['Normal']))
-    story.append(Paragraph(f"Anomalies detected: {stats.get(True, 0)}", styles['Normal']))
-    story.append(Paragraph(f"Normal events: {stats.get(False, 0)}", styles['Normal']))
+    stats_style = ParagraphStyle(
+        'Stats',
+        parent=styles['Normal'],
+        fontSize=12,
+        textColor=colors.HexColor('#333'),
+        spaceAfter=6
+    )
+    
+    total = len(current_results)
+    anomalies = len(current_results[current_results['is_anomaly'] == True])
+    normal = total - anomalies
+    
+    story.append(Paragraph(f"📊 Total events: {total}", stats_style))
+    story.append(Paragraph(f"🔴 Anomalies detected: {anomalies}", stats_style))
+    story.append(Paragraph(f"🟢 Normal events: {normal}", stats_style))
     story.append(Spacer(1, 0.2*inch))
     
     # Таблица
     table_data = [['Timestamp', 'User', 'Event', 'Anomaly Types', 'Severity']]
     for _, row in current_results.head(20).iterrows():
+        severity = row['severity']
+        # Эмодзи для наглядности
+        if severity == 'high':
+            severity_display = '🔴 high'
+        elif severity == 'medium':
+            severity_display = '🟡 medium'
+        elif severity == 'normal':
+            severity_display = '🟢 normal'
+        else:
+            severity_display = severity
+            
         table_data.append([
             row['timestamp'],
             row['user_id'],
             row['event_type'],
             row['anomaly_types'],
-            row['severity']
+            severity_display
         ])
     
     table = Table(table_data)
     table.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.grey),
+        ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#34495e')),
         ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
         ('FONTSIZE', (0,0), (-1,0), 12),
         ('BOTTOMPADDING', (0,0), (-1,0), 12),
-        ('BACKGROUND', (0,1), (-1,-1), colors.beige),
-        ('GRID', (0,0), (-1,-1), 1, colors.black)
+        ('BACKGROUND', (0,1), (-1,-1), colors.HexColor('#f8f9fa')),
+        ('GRID', (0,0), (-1,-1), 1, colors.HexColor('#bdc3c7'))
     ]))
     story.append(table)
+    
+    # Графики
+    img_path = save_charts_to_image()
+    if img_path and os.path.exists(img_path):
+        story.append(Spacer(1, 0.3*inch))
+        story.append(Paragraph("📈 Analytics Charts", styles['Heading2']))
+        story.append(Spacer(1, 0.1*inch))
+        img = Image(img_path, width=6*inch, height=2.5*inch)
+        story.append(img)
+        try:
+            os.remove(img_path)
+        except:
+            pass
     
     doc.build(story)
     buffer.seek(0)
