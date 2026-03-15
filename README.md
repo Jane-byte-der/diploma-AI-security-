@@ -282,9 +282,9 @@ The web application is built on a classic client-server architecture and include
 **🌈Event visualization**
 
   **Analytics charts:**
-  - 📊 **Bar chart** — event distribution by user
-  - 🥧 **Pie chart** — types of detected anomalies (temporal, spatial, intensity, etc.)
-  - 📈 Charts are generated automatically after each analysis and update in real time
+  - 📊 **Bar chart** — event distribution by user (hover to see exact values)
+  - 🥧 **Pie chart** — types of detected anomalies (temporal, spatial, intensity, etc.) with hover details
+  - 📈 Charts are generated automatically after each analysis, update in real time, and support interactive exploration
 
   **Timeline:**
   - 📊 **Interactive timeline** — each hour displayed as an individual block
