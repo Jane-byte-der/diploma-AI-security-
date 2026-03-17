@@ -1191,7 +1191,6 @@ function simulateAttack(type) {
 }, 1500);
 
 // Send notifications to server with sequence (now inside setTimeout)
-let sequence = 0;
 newEvents.forEach(ev => {
     fetch('/add_notification', {
         method: 'POST',
@@ -1201,7 +1200,7 @@ newEvents.forEach(ev => {
             user_id: ev.user,
             message: `Anomaly: ${ev.type}`,
             details: `IP: ${ev.ip}`,
-            sequence: sequence++  // 0, 1, 2
+            sequence: globalSequence++  // 0,1,2 for first attack, 4,5,6 for second
         })
     });
 });
@@ -1222,7 +1221,7 @@ fetch('/add_notification', {
         user_id: null,
         message: 'Analysis complete',
         details: `${currentResults.length} events, ${newEvents.length} new anomalies`,
-        sequence: sequence++  // 3
+        sequence: globalSequence++  // 3 for first attack, 7 for second
     })
 });
 }
