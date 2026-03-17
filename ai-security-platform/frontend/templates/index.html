@@ -369,6 +369,28 @@
             
             <div class="stats-grid" id="stats"></div>
             
+            <!-- ATTACK SIMULATOR -->
+            <div class="simulator-panel" id="simulatorPanel">
+                <div class="simulator-header">
+                    <span class="simulator-title">🎯 ATTACK SIMULATOR</span>
+                    <span class="simulator-badge">LIVE DEMO</span>
+                </div>
+                <div class="simulator-buttons">
+                    <button class="simulator-btn insider" onclick="simulateAttack('insider')">
+                        <span>🚨</span> Night Insider
+                    </button>
+                    <button class="simulator-btn phishing" onclick="simulateAttack('phishing')">
+                        <span>🎣</span> Phishing Campaign
+                    </button>
+                    <button class="simulator-btn admin" onclick="simulateAttack('admin')">
+                        <span>👑</span> Admin Compromise
+                    </button>
+                </div>
+                <div class="simulator-status" id="simulatorStatus">
+                    Ready to simulate attacks
+                </div>
+            </div>
+            
             <!-- Filter panel -->
             <div class="filter-panel">
                 <input type="text" id="searchInput" placeholder="🔍 Search by user..." class="filter-search">
