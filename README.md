@@ -360,6 +360,7 @@ The web application is built on a classic client-server architecture and include
   - 🟡 Yellow notifications — suspicious activity (medium)
   - 🟢 Green notifications — informational messages (info)
 - Notifications update automatically every 5 seconds
+- The panel displays up to 20 most recent events with timestamps, severity levels, and details
 
 **🔥 Attack Simulator:**
 - Interactive panel for modeling various attack scenarios
