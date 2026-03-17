@@ -991,6 +991,14 @@ setInterval(loadNotifications, 5000);
 // Load immediately when page loads
 loadNotifications();
 
+async function clearNotifications() {
+    if (confirm('Delete all notifications and start fresh?')) {
+        await fetch('/clear_notifications', { method: 'POST' });
+        loadNotifications();
+        location.reload();
+    }
+}
+
 // Filter and search functionality
 function filterTable() {
     const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
