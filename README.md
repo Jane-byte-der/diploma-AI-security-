@@ -403,6 +403,7 @@ This tool fully implements the methodology described in Chapter 3 of the thesis,
 3.  **Detect anomalies** — the algorithm analyzes uploaded events and finds deviations from typical behavior based on temporal, spatial, and intensity parameters.
 4.  **Visualize results** — users see summary statistics (total events, number of anomalies, anomaly percentage) and a detailed table of each suspicious event, including its type and severity level.
 5.  **Provide Human-in-the-loop feedback** — the interface allows analysts to manually verify each anomaly by selecting a verdict (incident, suspicious, false positive). This data is saved and can be used for future model retraining.
+6.  **Simulate attacks** — use the simulator panel to add synthetic anomalies and observe system response in real time
 
 ### 📸 Screenshots
 
