@@ -1118,6 +1118,27 @@ function simulateAttack(type) {
     // Re-enable buttons
     buttons.forEach(btn => btn.disabled = false);
 }, 1500);
+
+// Send notifications to server
+    newEvents.forEach(ev => {
+        fetch('/add_notification', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                level: ev.severity,
+                user_id: ev.user,
+                message: `Anomaly: ${ev.type}`,
+                details: `IP: ${ev.ip}`
+            })
+        });
+    });
+    
+    // Send updated results to server for PDF
+    fetch('/update_results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ results: currentResults })
+    });
 }
     </script>
 </body>
