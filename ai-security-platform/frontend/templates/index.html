@@ -1020,6 +1020,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (filterNormal) filterNormal.addEventListener('change', filterTable);
 });
 
+// Update statistics based on current results
+function updateStatistics() {
+    const totalEvents = currentResults.length;
+    const anomalies = currentResults.filter(r => r.is_anomaly).length;
+    const anomalyRate = totalEvents > 0 ? ((anomalies / totalEvents) * 100).toFixed(1) : 0;
+    const affectedUsers = new Set(currentResults.map(r => r.user_id)).size;
+    
+    const statsHtml = `
+        <div class="stat-card">
+            <div class="stat-value">${totalEvents}</div>
+            <div class="stat-label">Total Events</div>
+        </div>
+        <div class="stat-card high">
+            <div class="stat-value">${anomalies}</div>
+            <div class="stat-label">Anomalies Detected</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">${anomalyRate}%</div>
+            <div class="stat-label">Anomaly Rate</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">${affectedUsers}</div>
+            <div class="stat-label">Affected Users</div>
+        </div>
+    `;
+    
+    document.getElementById('stats').innerHTML = statsHtml;
+}
+
 // ===== ATTACK SIMULATOR =====
 function simulateAttack(type) {
     const statusDiv = document.getElementById('simulatorStatus');
