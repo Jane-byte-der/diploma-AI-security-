@@ -925,7 +925,7 @@ function drawCharts(events) {
             }
         }
         
-        // Load notifications
+        // Load notifications with sorting (newest first)
 async function loadNotifications() {
     try {
         const response = await fetch('/notifications');
@@ -936,7 +936,23 @@ async function loadNotifications() {
         
         list.innerHTML = '';
         
-        notifications.forEach(n => {
+        // SORT: newest first (by timestamp, then by sequence/id)
+        const sorted = [...notifications].sort((a, b) => {
+            // First compare timestamps
+            const timeA = new Date(a.timestamp || 0).getTime();
+            const timeB = new Date(b.timestamp || 0).getTime();
+            
+            if (timeA !== timeB) {
+                return timeB - timeA; // newest first
+            }
+            
+            // If same time, use sequence or id (higher = newer)
+            const seqA = a.sequence || 0;
+            const seqB = b.sequence || 0;
+            return seqB - seqA;
+        });
+        
+        sorted.forEach(n => {
             const div = document.createElement('div');
             div.className = `notification ${n.level || 'system'}`;
             
@@ -946,7 +962,7 @@ async function loadNotifications() {
             let html = `
                 <div style="display: flex; justify-content: space-between;">
                     <span class="notification-time">${timeStr}</span>
-                    <span class="notification-level">${n.level?.toUpperCase() || 'SYSTEM'}</span>
+                    <span class="notification-level">${(n.level || 'SYSTEM').toUpperCase()}</span>
                 </div>
                 <div class="notification-message">${n.message}</div>
             `;
