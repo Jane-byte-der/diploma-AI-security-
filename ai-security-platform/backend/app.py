@@ -41,6 +41,8 @@ def add_notification(level, user_id, message, details="", sequence=0):
 def init_notifications_table():
     conn = sqlite3.connect('data/feedback.db')
     cursor = conn.cursor()
+    
+    # Create table if it doesn't exist
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS notifications (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,6 +53,14 @@ def init_notifications_table():
             details TEXT
         )
     ''')
+    
+    # Add sequence column if it doesn't exist
+    try:
+        cursor.execute('ALTER TABLE notifications ADD COLUMN sequence INTEGER DEFAULT 0')
+    except sqlite3.OperationalError:
+        # Column already exists - ignore
+        pass
+    
     conn.commit()
     conn.close()
 
