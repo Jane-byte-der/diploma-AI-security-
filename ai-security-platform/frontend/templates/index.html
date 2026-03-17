@@ -1162,6 +1162,8 @@ function simulateAttack(type) {
     // Update charts and timeline
     drawTimeline(currentResults);
     drawCharts(currentResults);
+    // Update statistics
+    updateStatistics();
     
     statusDiv.innerHTML = `<span style="color: #4ade80;">✅</span> Simulation complete! Added ${newEvents.length} events.`;
     
