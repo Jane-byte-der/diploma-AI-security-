@@ -305,6 +305,23 @@
             
             <div class="stats-grid" id="stats"></div>
             
+            <!-- Filter panel -->
+            <div class="filter-panel">
+                <input type="text" id="searchInput" placeholder="🔍 Search by user..." class="filter-search">
+                
+                <div class="filter-options">
+                    <label class="filter-label high">
+                        <input type="checkbox" id="filterHigh" value="high" checked> High
+                    </label>
+                    <label class="filter-label medium">
+                        <input type="checkbox" id="filterMedium" value="medium" checked> Medium
+                    </label>
+                    <label class="filter-label normal">
+                        <input type="checkbox" id="filterNormal" value="normal" checked> Normal
+                    </label>
+                </div>
+            </div>
+            
             <h3>Detected Anomalies</h3>
             <table id="resultsTable">
                 <thead>
