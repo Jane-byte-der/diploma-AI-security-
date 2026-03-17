@@ -27,13 +27,13 @@ detector = AnomalyDetector()
 current_results = None
 
 # Function to add notifications to the database
-def add_notification(level, user_id, message, details=""):
+def add_notification(level, user_id, message, details="", sequence=0):
     conn = sqlite3.connect('data/feedback.db')
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO notifications (timestamp, level, user_id, message, details)
-        VALUES (datetime('now'), ?, ?, ?, ?)
-    ''', (level, user_id, message, details))
+        INSERT INTO notifications (timestamp, level, user_id, message, details, sequence)
+        VALUES (datetime('now'), ?, ?, ?, ?, ?)
+    ''', (level, user_id, message, details, sequence))
     conn.commit()
     conn.close()
 
