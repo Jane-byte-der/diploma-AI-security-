@@ -263,13 +263,14 @@ def download_pdf():
 
 @app.route('/notifications')
 def get_notifications():
-    """Get recent notifications"""
+    """Get recent notifications with proper ordering"""
     conn = sqlite3.connect('data/feedback.db')
     cursor = conn.cursor()
+    # Order by sequence first (smaller = earlier), then by id (newer first for same sequence)
     cursor.execute('''
-        SELECT timestamp, level, user_id, message, details 
+        SELECT timestamp, level, user_id, message, details, sequence
         FROM notifications 
-        ORDER BY id DESC 
+        ORDER BY sequence ASC, id DESC 
         LIMIT 50
     ''')
     rows = cursor.fetchall()
@@ -282,7 +283,8 @@ def get_notifications():
             'level': row[1],
             'user_id': row[2],
             'message': row[3],
-            'details': row[4]
+            'details': row[4],
+            'sequence': row[5]  # Include sequence in response for client-side sorting
         })
     
     return jsonify(notifications)
