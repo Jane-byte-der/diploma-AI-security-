@@ -1070,16 +1070,37 @@ function simulateAttack(type) {
     // Add events to currentResults and update display
     setTimeout(() => {
     newEvents.forEach(ev => {
+        // Determine user role based on user_id
+        let user_role = 'Unknown';
+        if (ev.user === 'IVANOV_ADM') user_role = 'Administrator';
+        else if (ev.user === 'PETROV_BUH') user_role = 'Accountant';
+        else if (ev.user === 'SIDOROV_DEV') user_role = 'Developer';
+        else if (ev.user === 'SMIRNOV_MGR') user_role = 'Manager';
+        
+        // Determine IP type
+        let ip_type = ev.ip.startsWith('10.') ? 'Internal' : 'External';
+        
+        // Determine resource based on event type
+        let resource = '';
+        if (ev.event === 'FILE_ACCESS') resource = 'sensitive_data.dat';
+        else if (ev.event === 'DB_QUERY') resource = 'customer_db';
+        else if (ev.event === 'LOGIN') resource = 'DC-01';
+        else if (ev.event === 'WEB_ACCESS') resource = 'malicious-site.com';
+        
         const newResult = {
             id: currentResults.length + 1,
             timestamp: `${date} ${ev.time}`,
             user_id: ev.user,
+            user_role: user_role,
             event_type: ev.event,
+            resource: resource,
+            ip_address: ev.ip,
+            ip_type: ip_type,
+            data_size_kb: ev.size,
             anomaly_types: ev.type,
             severity: ev.severity,
             is_anomaly: true,
-            ip_address: ev.ip,
-            data_size_kb: ev.size
+            details: ''
         };
         currentResults.push(newResult);
     });
