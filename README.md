@@ -368,6 +368,14 @@ The web application is built on a classic client-server architecture and include
   - 👑 **Admin Compromise** — adds 3 anomalies with unusual logins and mass queries (user: SIDOROV_DEV)
 - Each click updates all system components in real time
 
+**Dynamic Updates:**
+Each time a simulator button is clicked, the following components update automatically:
+- 📊 **Statistics** — total events, anomalies count, anomaly rate, affected users
+- 📋 **Table** — new rows added with complete data (user role, IP type, resource)
+- 📈 **Charts** — bar and pie charts redrawn with updated data
+- 📉 **Timeline** — new color-coded blocks appear
+- 📨 **Notifications** — new entries appear in the panel
+
 **Testing Results:**
 Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Successfully loaded and processed 10 security events
