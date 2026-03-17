@@ -1154,6 +1154,41 @@ function simulateAttack(type) {
     console.log('Events added:', newEvents.map(e => e.type));
     console.log('Total after add:', currentResults.length);
     
+    // Send notifications to server with sequence (NOW INSIDE setTimeout)
+    newEvents.forEach(ev => {
+        fetch('/add_notification', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                level: ev.severity,
+                user_id: ev.user,
+                message: `Anomaly: ${ev.type}`,
+                details: `IP: ${ev.ip}`,
+                sequence: globalSequence++  // 0,1,2 for this attack
+            })
+        });
+    });
+
+    // Send updated results to server for PDF
+    fetch('/update_results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ results: currentResults })
+    });
+
+    // Send analysis complete notification with sequence
+    fetch('/add_notification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            level: 'info',
+            user_id: null,
+            message: 'Analysis complete',
+            details: `${currentResults.length} events, ${newEvents.length} new anomalies`,
+            sequence: globalSequence++  // 3 for this attack
+        })
+    });
+    
     // Rebuild the table completely
     const tbody = document.getElementById('tableBody');
     tbody.innerHTML = '';
@@ -1190,41 +1225,6 @@ function simulateAttack(type) {
     // Re-enable buttons
     buttons.forEach(btn => btn.disabled = false);
 }, 1500);
-
-// Send notifications to server with sequence (now inside setTimeout)
-newEvents.forEach(ev => {
-    fetch('/add_notification', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            level: ev.severity,
-            user_id: ev.user,
-            message: `Anomaly: ${ev.type}`,
-            details: `IP: ${ev.ip}`,
-            sequence: globalSequence++  // 0,1,2 for first attack, 4,5,6 for second
-        })
-    });
-});
-
-// Send updated results to server for PDF
-fetch('/update_results', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ results: currentResults })
-});
-
-// Send analysis complete notification with sequence
-fetch('/add_notification', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        level: 'info',
-        user_id: null,
-        message: 'Analysis complete',
-        details: `${currentResults.length} events, ${newEvents.length} new anomalies`,
-        sequence: globalSequence++  // 3 for first attack, 7 for second
-    })
-});
 }
     </script>
 </body>
