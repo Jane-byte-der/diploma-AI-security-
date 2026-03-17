@@ -1190,7 +1190,7 @@ function simulateAttack(type) {
     buttons.forEach(btn => btn.disabled = false);
 }, 1500);
 
-// Send notifications to server with sequence
+// Send notifications to server with sequence (now inside setTimeout)
 let sequence = 0;
 newEvents.forEach(ev => {
     fetch('/add_notification', {
