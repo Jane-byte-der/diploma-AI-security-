@@ -594,13 +594,16 @@
             
             <button onclick="downloadPDF()" style="margin-top: 10px; background-color: #27ae60;">📄 Download PDF Report</button>
             
-            <!-- Notifications panel -->
-        <div class="notifications-panel">
-            <h3>📨 Recent Notifications</h3>
-            <div id="notifications-list">
-                <!-- Notifications will be loaded here -->
-            </div>
-        </div>
+           <!-- Notifications panel -->
+<div class="notifications-panel">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>📨 Recent Notifications</h3>
+        <button onclick="clearNotifications()" style="background-color: #dc3545; padding: 5px 10px; font-size: 12px;">🗑️ Clear All</button>
+    </div>
+    <div id="notifications-list">
+        <!-- Notifications will be loaded here -->
+    </div>
+</div>
             
         </div>
     </div>
