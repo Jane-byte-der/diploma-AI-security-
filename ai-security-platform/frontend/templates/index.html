@@ -1160,6 +1160,18 @@ function simulateAttack(type) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ results: currentResults })
     });
+    
+    // Send analysis complete notification
+fetch('/add_notification', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        level: 'info',
+        user_id: null,
+        message: 'Analysis complete',
+        details: `${currentResults.length} events, ${newEvents.length} new anomalies`
+    })
+});
 }
     </script>
 </body>
