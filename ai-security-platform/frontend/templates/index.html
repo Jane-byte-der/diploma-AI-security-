@@ -1190,28 +1190,30 @@ function simulateAttack(type) {
     buttons.forEach(btn => btn.disabled = false);
 }, 1500);
 
-// Send notifications to server
-    newEvents.forEach(ev => {
-        fetch('/add_notification', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                level: ev.severity,
-                user_id: ev.user,
-                message: `Anomaly: ${ev.type}`,
-                details: `IP: ${ev.ip}`
-            })
-        });
-    });
-    
-    // Send updated results to server for PDF
-    fetch('/update_results', {
+// Send notifications to server with sequence
+let sequence = 0;
+newEvents.forEach(ev => {
+    fetch('/add_notification', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ results: currentResults })
+        body: JSON.stringify({
+            level: ev.severity,
+            user_id: ev.user,
+            message: `Anomaly: ${ev.type}`,
+            details: `IP: ${ev.ip}`,
+            sequence: sequence++  // 0, 1, 2
+        })
     });
-    
-    // Send analysis complete notification
+});
+
+// Send updated results to server for PDF
+fetch('/update_results', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ results: currentResults })
+});
+
+// Send analysis complete notification with sequence
 fetch('/add_notification', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -1219,7 +1221,8 @@ fetch('/add_notification', {
         level: 'info',
         user_id: null,
         message: 'Analysis complete',
-        details: `${currentResults.length} events, ${newEvents.length} new anomalies`
+        details: `${currentResults.length} events, ${newEvents.length} new anomalies`,
+        sequence: sequence++  // 3
     })
 });
 }
