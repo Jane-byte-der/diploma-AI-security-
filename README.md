@@ -363,9 +363,9 @@ The web application is built on a classic client-server architecture and include
 
 **🔥 Attack Simulator:**
 - Interactive panel for modeling various attack scenarios
-- 🚨 **Night Insider** — adds 3 anomalies with intensive data access (user: IVANOV_ADM)
-- 🎣 **Phishing Campaign** — adds 3 anomalies with suspicious web access (user: PETROV_BUH)
-- 👑 **Admin Compromise** — adds 3 anomalies with unusual logins and mass queries (user: SIDOROV_DEV)
+  - 🚨 **Night Insider** — adds 3 anomalies with intensive data access (user: IVANOV_ADM)
+  - 🎣 **Phishing Campaign** — adds 3 anomalies with suspicious web access (user: PETROV_BUH)
+  - 👑 **Admin Compromise** — adds 3 anomalies with unusual logins and mass queries (user: SIDOROV_DEV)
 - Each click updates all system components in real time
 
 **Testing Results:**
