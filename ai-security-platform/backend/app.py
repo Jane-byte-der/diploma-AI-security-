@@ -302,6 +302,15 @@ def add_notification_route():
     )
     return jsonify({'status': 'ok'})
 
+@app.route('/clear_notifications', methods=['POST'])
+def clear_notifications():
+    conn = sqlite3.connect('data/feedback.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM notifications')
+    conn.commit()
+    conn.close()
+    return jsonify({'status': 'ok'})
+
 @app.route('/update_results', methods=['POST'])
 def update_results():
     """Update current_results from frontend"""
