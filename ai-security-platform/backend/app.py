@@ -291,9 +291,15 @@ def get_notifications():
 
 @app.route('/add_notification', methods=['POST'])
 def add_notification_route():
-    """Add a notification from the frontend"""
+    """Add a notification from the frontend with sequence"""
     data = request.json
-    add_notification(data['level'], data['user_id'], data['message'], data['details'])
+    add_notification(
+        data['level'], 
+        data['user_id'], 
+        data['message'], 
+        data['details'],
+        data.get('sequence', 0)  # Get sequence from request, default 0 if not present
+    )
     return jsonify({'status': 'ok'})
 
 @app.route('/update_results', methods=['POST'])
