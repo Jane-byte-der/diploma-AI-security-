@@ -607,6 +607,7 @@
     
     <script>
         let currentResults = [];
+        let globalSequence = 0;  // Global counter for notifications ordering across multiple attacks
         
         async function analyzeFile() {
             const fileInput = document.getElementById('fileInput');
