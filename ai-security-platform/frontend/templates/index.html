@@ -1011,6 +1011,82 @@ document.addEventListener('DOMContentLoaded', function() {
     if (filterMedium) filterMedium.addEventListener('change', filterTable);
     if (filterNormal) filterNormal.addEventListener('change', filterTable);
 });
+
+// ===== ATTACK SIMULATOR =====
+function simulateAttack(type) {
+    const statusDiv = document.getElementById('simulatorStatus');
+    const buttons = document.querySelectorAll('.simulator-btn');
+    
+    // Disable buttons during simulation
+    buttons.forEach(btn => btn.disabled = true);
+    
+    let message = '';
+    let newEvents = [];
+    let timestamp = new Date().toLocaleTimeString();
+    let date = new Date().toLocaleDateString('ru-RU').split('.').reverse().join('.');
+    
+    statusDiv.style.animation = 'none';
+    statusDiv.offsetHeight; // trigger reflow
+    
+    switch(type) {
+        case 'insider':
+            message = '🚨 SIMULATION: Night Insider Attack - Copying sensitive data after hours';
+            newEvents = [
+                { time: '03:15', user: 'IVANOV_ADM', event: 'FILE_ACCESS', type: 'intensity', severity: 'high', ip: '10.10.1.5', size: 150000 },
+                { time: '03:22', user: 'IVANOV_ADM', event: 'FILE_ACCESS', type: 'intensity', severity: 'high', ip: '10.10.1.5', size: 250000 },
+                { time: '03:45', user: 'IVANOV_ADM', event: 'DB_QUERY', type: 'intensity', severity: 'high', ip: '10.10.1.5', size: 500000 }
+            ];
+            break;
+        case 'phishing':
+            message = '🎣 SIMULATION: Phishing Campaign - Suspicious web access and downloads';
+            newEvents = [
+                { time: '09:45', user: 'PETROV_BUH', event: 'WEB_ACCESS', type: 'spatial', severity: 'medium', ip: '185.124.33.15', size: 5000 },
+                { time: '09:47', user: 'PETROV_BUH', event: 'FILE_ACCESS', type: 'intensity', severity: 'medium', ip: '185.124.33.15', size: 75000 },
+                { time: '09:50', user: 'PETROV_BUH', event: 'FILE_ACCESS', type: 'intensity', severity: 'high', ip: '185.124.33.15', size: 200000 }
+            ];
+            break;
+        case 'admin':
+            message = '👑 SIMULATION: Admin Compromise - Unusual login patterns and data access';
+            newEvents = [
+                { time: '23:15', user: 'SIDOROV_DEV', event: 'LOGIN', type: 'temporal,spatial', severity: 'high', ip: '45.128.34.22', size: 0 },
+                { time: '23:18', user: 'SIDOROV_DEV', event: 'DB_QUERY', type: 'intensity', severity: 'high', ip: '45.128.34.22', size: 300000 },
+                { time: '23:22', user: 'SIDOROV_DEV', event: 'FILE_ACCESS', type: 'intensity', severity: 'high', ip: '45.128.34.22', size: 450000 }
+            ];
+            break;
+    }
+    
+    statusDiv.style.backgroundColor = 'rgba(0,0,0,0.3)';
+    statusDiv.innerHTML = `<span style="color: #4ade80;">⚡</span> ${message}`;
+    statusDiv.style.animation = 'glow 2s infinite';
+    
+    // Add events to currentResults and update display
+    setTimeout(() => {
+        newEvents.forEach(ev => {
+            const newResult = {
+                id: currentResults.length + 1,
+                timestamp: `${date} ${ev.time}`,
+                user_id: ev.user,
+                event_type: ev.event,
+                anomaly_types: ev.type,
+                severity: ev.severity,
+                is_anomaly: true,
+                ip_address: ev.ip,
+                data_size_kb: ev.size
+            };
+            currentResults.push(newResult);
+        });
+        
+        // Update display
+        const tbody = document.getElementById('tableBody');
+        const data = { results: currentResults };
+        displayResults(data);
+        
+        statusDiv.innerHTML = `<span style="color: #4ade80;">✅</span> Simulation complete! Added ${newEvents.length} events.`;
+        
+        // Re-enable buttons
+        buttons.forEach(btn => btn.disabled = false);
+    }, 1500);
+}
     </script>
 </body>
 </html>
