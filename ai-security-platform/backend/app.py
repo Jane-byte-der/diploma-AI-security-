@@ -277,6 +277,21 @@ def get_notifications():
     
     return jsonify(notifications)
 
+@app.route('/add_notification', methods=['POST'])
+def add_notification_route():
+    """Add a notification from the frontend"""
+    data = request.json
+    add_notification(data['level'], data['user_id'], data['message'], data['details'])
+    return jsonify({'status': 'ok'})
+
+@app.route('/update_results', methods=['POST'])
+def update_results():
+    """Update current_results from frontend"""
+    global current_results
+    data = request.json
+    current_results = pd.DataFrame(data['results'])
+    return jsonify({'status': 'ok'})
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
     app.run(debug=True, host='0.0.0.0', port=port)
