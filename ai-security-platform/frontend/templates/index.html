@@ -809,6 +809,54 @@ setInterval(loadNotifications, 5000);
 
 // Load immediately when page loads
 loadNotifications();
+
+// Filter and search functionality
+function filterTable() {
+    const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+    const showHigh = document.getElementById('filterHigh')?.checked ?? true;
+    const showMedium = document.getElementById('filterMedium')?.checked ?? true;
+    const showNormal = document.getElementById('filterNormal')?.checked ?? true;
+    
+    const table = document.getElementById('resultsTable');
+    if (!table) return;
+    
+    const rows = table.getElementsByTagName('tbody')[0]?.getElementsByTagName('tr') || [];
+    
+    for (let row of rows) {
+        const userCell = row.cells[1]; // User column
+        const severityCell = row.cells[4]; // Severity column
+        
+        if (!userCell || !severityCell) continue;
+        
+        const userName = userCell.textContent.toLowerCase();
+        const severity = severityCell.textContent.toLowerCase().trim();
+        
+        // Check search match
+        const searchMatch = searchTerm === '' || userName.includes(searchTerm);
+        
+        // Check severity filter
+        let severityMatch = false;
+        if (severity.includes('high') && showHigh) severityMatch = true;
+        else if (severity.includes('medium') && showMedium) severityMatch = true;
+        else if (severity.includes('normal') && showNormal) severityMatch = true;
+        
+        // Show or hide row
+        row.style.display = (searchMatch && severityMatch) ? '' : 'none';
+    }
+}
+
+// Add event listeners when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const filterHigh = document.getElementById('filterHigh');
+    const filterMedium = document.getElementById('filterMedium');
+    const filterNormal = document.getElementById('filterNormal');
+    
+    if (searchInput) searchInput.addEventListener('input', filterTable);
+    if (filterHigh) filterHigh.addEventListener('change', filterTable);
+    if (filterMedium) filterMedium.addEventListener('change', filterTable);
+    if (filterNormal) filterNormal.addEventListener('change', filterTable);
+});
     </script>
 </body>
 </html>
