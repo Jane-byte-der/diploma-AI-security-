@@ -270,7 +270,7 @@ def get_notifications():
     cursor.execute('''
         SELECT timestamp, level, user_id, message, details, sequence
         FROM notifications 
-        ORDER BY sequence ASC, id DESC 
+        ORDER BY sequence DESC, id DESC
         LIMIT 50
     ''')
     rows = cursor.fetchall()
