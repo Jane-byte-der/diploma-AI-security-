@@ -1134,6 +1134,10 @@ function simulateAttack(type) {
         currentResults.push(newResult);
     });
     
+    console.log('Admin attack - events to add:', newEvents.length);
+    console.log('Events added:', newEvents.map(e => e.type));
+    console.log('Total after add:', currentResults.length);
+    
     // Rebuild the table completely
     const tbody = document.getElementById('tableBody');
     tbody.innerHTML = '';
