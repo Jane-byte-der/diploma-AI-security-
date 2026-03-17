@@ -1061,31 +1061,55 @@ function simulateAttack(type) {
     
     // Add events to currentResults and update display
     setTimeout(() => {
-        newEvents.forEach(ev => {
-            const newResult = {
-                id: currentResults.length + 1,
-                timestamp: `${date} ${ev.time}`,
-                user_id: ev.user,
-                event_type: ev.event,
-                anomaly_types: ev.type,
-                severity: ev.severity,
-                is_anomaly: true,
-                ip_address: ev.ip,
-                data_size_kb: ev.size
-            };
-            currentResults.push(newResult);
-        });
+    newEvents.forEach(ev => {
+        const newResult = {
+            id: currentResults.length + 1,
+            timestamp: `${date} ${ev.time}`,
+            user_id: ev.user,
+            event_type: ev.event,
+            anomaly_types: ev.type,
+            severity: ev.severity,
+            is_anomaly: true,
+            ip_address: ev.ip,
+            data_size_kb: ev.size
+        };
+        currentResults.push(newResult);
+    });
+    
+    // Rebuild the table completely
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    
+    currentResults.forEach(result => {
+        const row = tbody.insertRow();
+        row.className = `severity-${result.severity}`;
         
-        // Update display
-        const tbody = document.getElementById('tableBody');
-        const data = { results: currentResults };
-        displayResults(data);
-        
-        statusDiv.innerHTML = `<span style="color: #4ade80;">✅</span> Simulation complete! Added ${newEvents.length} events.`;
-        
-        // Re-enable buttons
-        buttons.forEach(btn => btn.disabled = false);
-    }, 1500);
+        row.innerHTML = `
+            <td>${result.timestamp}</td>
+            <td>${result.user_id}</td>
+            <td>${result.event_type}</td>
+            <td>${result.anomaly_types}</td>
+            <td>${result.severity}</td>
+            <td>
+                <select onchange="labelAnomaly(${result.id}, this.value)">
+                    <option value="">Select verdict</option>
+                    <option value="incident">🚨 Incident</option>
+                    <option value="suspicious">⚠️ Suspicious</option>
+                    <option value="false">✅ False Positive</option>
+                </select>
+            </td>
+        `;
+    });
+    
+    // Update charts and timeline
+    drawTimeline(currentResults);
+    drawCharts(currentResults);
+    
+    statusDiv.innerHTML = `<span style="color: #4ade80;">✅</span> Simulation complete! Added ${newEvents.length} events.`;
+    
+    // Re-enable buttons
+    buttons.forEach(btn => btn.disabled = false);
+}, 1500);
 }
     </script>
 </body>
