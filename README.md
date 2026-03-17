@@ -305,6 +305,11 @@ The web application is built on a classic client-server architecture and include
 - 💾 **Database storage** of all decisions in SQLite for future model retraining
 - 📥 **CSV export** of results for further analysis
 
+**Table interaction:**
+- 🔎 **Search by user** — input field filters table rows in real time
+- 🔽 **Severity filter** — select levels to display (high/medium/normal)
+- ⚡ **Simultaneous filtering** — search and severity filters work together to refine results
+
 **Additional feature:**
 - ▶️ **"Load Example" button** — loads the test dataset with one click, allowing instant testing of the application without the need to download files.
 
