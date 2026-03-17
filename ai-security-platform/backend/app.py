@@ -260,7 +260,7 @@ def get_notifications():
         SELECT timestamp, level, user_id, message, details 
         FROM notifications 
         ORDER BY id DESC 
-        LIMIT 10
+        LIMIT 20
     ''')
     rows = cursor.fetchall()
     conn.close()
