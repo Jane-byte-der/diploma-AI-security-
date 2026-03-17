@@ -925,7 +925,7 @@ function drawCharts(events) {
             }
         }
         
-        // Load notifications with sorting (newest first)
+        // Load notifications with sorting (newest first, then by ID for same time)
 async function loadNotifications() {
     try {
         const response = await fetch('/notifications');
@@ -936,7 +936,7 @@ async function loadNotifications() {
         
         list.innerHTML = '';
         
-        // SORT: newest first (by timestamp, then by sequence/id)
+        // SORT: newest first (by timestamp, then by ID for same time)
         const sorted = [...notifications].sort((a, b) => {
             // First compare timestamps
             const timeA = new Date(a.timestamp || 0).getTime();
@@ -946,10 +946,9 @@ async function loadNotifications() {
                 return timeB - timeA; // newest first
             }
             
-            // If same time, use sequence or id (higher = newer)
-            const seqA = a.sequence || 0;
-            const seqB = b.sequence || 0;
-            return seqB - seqA;
+            // If same time, sort by ID (higher ID = newer)
+            // ID is not in the response, so we use the order they came from server
+            return notifications.indexOf(b) - notifications.indexOf(a);
         });
         
         sorted.forEach(n => {
