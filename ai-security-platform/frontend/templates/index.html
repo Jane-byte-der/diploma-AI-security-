@@ -958,9 +958,23 @@ setTimeout(() => {
                 `;
             });
             
-            currentResults = data.results;
+           currentResults = data.results;
             drawTimeline(data.results);
             drawCharts(data.results);
+            
+            // Highlight new anomalies with pulse effect
+            setTimeout(() => {
+                const newRows = document.querySelectorAll('.severity-high, .severity-medium');
+                newRows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.style.transition = 'background 0.5s';
+                        row.style.background = '#fff9c4';
+                        setTimeout(() => {
+                            row.style.background = '';
+                        }, 500);
+                    }, index * 100);
+                });
+            }, 200);
         }
         
         // Timeline visualization function
