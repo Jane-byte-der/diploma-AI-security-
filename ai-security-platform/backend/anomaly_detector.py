@@ -319,10 +319,10 @@ class AnomalyDetector:
     
     def get_confusion_matrix(self, results_df: pd.DataFrame, ground_truth_col: str = 'Is_Anomaly') -> Dict:
         """
-        Вычисляет матрицу ошибок для оценки качества (Таблица 3.6 из диплома)
+        Calculate confusion matrix for quality evaluation (Table 3.6 from thesis)
         """
         if ground_truth_col not in results_df.columns:
-            return {'error': f'Колонка {ground_truth_col} не найдена'}
+            return {'error': f'Column {ground_truth_col} not found'}
         
         tp = len(results_df[(results_df['is_anomaly']) & (results_df[ground_truth_col] == 1)])
         fp = len(results_df[(results_df['is_anomaly']) & (results_df[ground_truth_col] == 0)])
@@ -340,3 +340,61 @@ class AnomalyDetector:
             'f1_score': round(f1 * 100, 2),
             'accuracy': round((tp + tn) / (tp + tn + fp + fn) * 100, 2)
         }
+    
+    def generate_anomaly_details(self, anomaly_type: str, user: str, ip: str, size: int) -> Dict:
+        """
+        Generate details for simulated anomalies (reuses same logic as real detection)
+        
+        Args:
+            anomaly_type (str): Type of anomaly (e.g., 'temporal', 'spatial,intensity')
+            user (str): User ID
+            ip (str): IP address
+            size (int): Data size in KB
+        
+        Returns:
+            dict: Details dictionary or empty dict if no details
+        """
+        details = {}
+        
+        # Temporal anomaly details
+        if 'temporal' in anomaly_type:
+            # Expected working hours based on user role
+            if 'ADM' in user or 'DEV' in user:
+                details['expected_hours'] = '9-18'
+            elif 'BUH' in user:
+                details['expected_hours'] = '9-17'
+            else:
+                details['expected_hours'] = '9-17'
+        
+        # Spatial anomaly details
+        if 'spatial' in anomaly_type:
+            if str(ip).startswith('10.'):
+                # Internal IP - expected to be in same subnet
+                parts = str(ip).split('.')
+                if len(parts) >= 3:
+                    details['expected_ip_prefix'] = f"{parts[0]}.{parts[1]}.{parts[2]}."
+                else:
+                    details['expected_ip_prefix'] = '10.10.1.'
+            else:
+                # External IP - not expected
+                details['expected_location'] = 'internal network'
+        
+        # Intensity anomaly details
+        if 'intensity' in anomaly_type and size > 0:
+            # Calculate typical statistics (simplified version of real logic)
+            details['avg_volume'] = int(size * 0.3)  # 30% of current as "average"
+            details['threshold'] = int(size * 0.8)   # 80% as threshold
+            details['std_dev'] = int(size * 0.15)    # 15% as standard deviation
+        
+        # Unknown user anomaly
+        if 'unknown_user' in anomaly_type:
+            details['note'] = 'User not found in employee database'
+            details['action'] = 'requires manual verification'
+        
+        # Resource anomaly
+        if 'resource' in anomaly_type:
+            details['note'] = 'Access to unusual resource'
+            details['typical_resources'] = ['work_files', 'shared_docs']  # Generic example
+        
+        logger.debug(f"Generated details for {anomaly_type}: {details}")
+        return details
