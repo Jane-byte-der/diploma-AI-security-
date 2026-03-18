@@ -940,20 +940,8 @@ async function loadNotifications() {
         
         list.innerHTML = '';
         
-        // SORT: newest first (by timestamp, then by ID for same time)
-        const sorted = [...notifications].sort((a, b) => {
-            // First compare timestamps
-            const timeA = new Date(a.timestamp || 0).getTime();
-            const timeB = new Date(b.timestamp || 0).getTime();
-            
-            if (timeA !== timeB) {
-                return timeB - timeA; // newest first
-            }
-            
-            // If same time, sort by ID (higher ID = newer)
-            // ID is not in the response, so we use the order they came from server
-            return notifications.indexOf(b) - notifications.indexOf(a);
-        });
+        // Use server-side sorting (already ordered by sequence, timestamp, id)
+const sorted = notifications;  // Data is already properly sorted by server
         
         sorted.forEach(n => {
             const div = document.createElement('div');
