@@ -8,7 +8,6 @@ from flask import Flask, request, jsonify, render_template, send_file
 # Absolute import for production (works with gunicorn)
 from backend.anomaly_detector import AnomalyDetector
 import pandas as pd
-import os
 import json
 from datetime import datetime
 from reportlab.lib import colors
