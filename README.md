@@ -391,6 +391,20 @@ Each time a simulator button is clicked, the following components update automat
 - 📉 **Timeline** — new color-coded blocks appear
 - 📨 **Notifications** — new entries appear in the panel
 
+### 🗑️ Notification Cleanup
+- A **"Clear All"** button has been added to the notifications panel
+- One click deletes all records from the database
+- The system asks for confirmation before deletion
+
+### 🧹 Automatic Database Management
+- The database maintains only the latest **100 notifications**
+- Old records are automatically deleted when new ones are added
+- This prevents unlimited database growth and optimizes performance
+
+### ⏱️ High Precision Timestamps
+- All events are saved with millisecond precision
+- Ensures correct ordering even during rapid consecutive attacks
+
 **Testing Results:**
 Testing on the synthetic dataset (Table 3.2) yielded the following results:
 - Successfully loaded and processed 10 security events
