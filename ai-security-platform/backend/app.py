@@ -19,6 +19,11 @@ from reportlab.lib.units import inch
 import io
 import sqlite3
 
+# Fix Python path for production
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 app = Flask(__name__, 
             template_folder='../frontend/templates',
             static_folder='../frontend/static')
