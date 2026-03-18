@@ -30,10 +30,13 @@ current_results = None
 def add_notification(level, user_id, message, details="", sequence=0):
     conn = sqlite3.connect('data/feedback.db')
     cursor = conn.cursor()
+    # Generate timestamp with milliseconds for precise ordering
+    from datetime import datetime
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]  # Keep 3 decimal places for milliseconds
     cursor.execute('''
         INSERT INTO notifications (timestamp, level, user_id, message, details, sequence)
-        VALUES (datetime('now'), ?, ?, ?, ?, ?)
-    ''', (level, user_id, message, details, sequence))
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (timestamp, level, user_id, message, details, sequence))
     conn.commit()
     conn.close()
 
