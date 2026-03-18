@@ -1460,6 +1460,56 @@ async function simulateAttack(type) {
     buttons.forEach(btn => btn.disabled = false);
 }, 1500);
 }
+
+// Typing effect for welcome section
+const phrases = [
+    'Information Security • Real-time Monitoring',
+    'Machine Learning • Behavioral Analysis',
+    '5 Anomaly Types • UEBA • Human-in-the-loop',
+    'Bachelor Thesis • MSLU 2026'
+];
+
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingElement = document.querySelector('.typing-effect');
+
+function typeEffect() {
+    if (!typingElement) return;
+    
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+        typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+    }
+    
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 2000);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        setTimeout(typeEffect, 500);
+    } else {
+        setTimeout(typeEffect, isDeleting ? 50 : 100);
+    }
+}
+
+// Start typing effect when page loads
+if (document.querySelector('.typing-effect')) {
+    setTimeout(typeEffect, 1000);
+}
+
+// Smooth scroll to upload area when clicking scroll hint
+document.querySelector('.scroll-hint span')?.addEventListener('click', () => {
+    document.querySelector('.upload-area').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+});
     </script>
 </body>
 </html>
