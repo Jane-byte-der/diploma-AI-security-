@@ -320,6 +320,18 @@ def add_notification_route():
     )
     return jsonify({'status': 'ok'})
 
+@app.route('/generate_details', methods=['POST'])
+def generate_details():
+    """Generate anomaly details using the detector's logic"""
+    data = request.json
+    details = detector.generate_anomaly_details(
+        data['anomaly_type'],
+        data['user'],
+        data['ip'],
+        data['size']
+    )
+    return jsonify({'details': details})
+
 @app.route('/clear_notifications', methods=['POST'])
 def clear_notifications():
     conn = sqlite3.connect('data/feedback.db')
