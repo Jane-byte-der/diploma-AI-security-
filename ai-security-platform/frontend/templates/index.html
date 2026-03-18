@@ -722,7 +722,7 @@ function drawTimeline(events) {
                 const hour = parseInt(event.timestamp.split(' ')[1].split(':')[0]);
                 if (!isNaN(hour) && hour >= 0 && hour < 24) {
                     hours[hour].total++;
-// Проверяем is_anomaly как число (1) или строку ("1"/"True")
+// Check is_anomaly as number (1) or string ("1"/"True")
                     if (event.is_anomaly == 1 || event.is_anomaly == "1" || event.is_anomaly === true) {
                         hours[hour].anomalies++;
                     }
