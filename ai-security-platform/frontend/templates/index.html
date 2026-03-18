@@ -1684,6 +1684,26 @@ function animateValue(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
+// Update chart colors when theme changes
+function updateChartTheme() {
+    const isDark = document.body.classList.contains('dark-mode');
+    const textColor = isDark ? '#ffffff' : '#333';
+    const gridColor = isDark ? '#404040' : '#ddd';
+    
+    if (window.userChartInstance) {
+        window.userChartInstance.options.scales.x.grid.color = gridColor;
+        window.userChartInstance.options.scales.y.grid.color = gridColor;
+        window.userChartInstance.options.scales.x.ticks.color = textColor;
+        window.userChartInstance.options.scales.y.ticks.color = textColor;
+        window.userChartInstance.update();
+    }
+    
+    if (window.typeChartInstance) {
+        window.typeChartInstance.options.plugins.legend.labels.color = textColor;
+        window.typeChartInstance.update();
+    }
+}
+
 // Toggle dark theme
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
