@@ -102,6 +102,19 @@ header .subtitle {
             padding: 15px;
             border-radius: 5px;
             border-left: 4px solid #3498db;
+            animation: slideIn 0.5s ease-out;
+            transform-origin: left;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .stat-card.high {
