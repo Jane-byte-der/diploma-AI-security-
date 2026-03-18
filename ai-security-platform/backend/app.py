@@ -30,13 +30,28 @@ current_results = None
 def add_notification(level, user_id, message, details="", sequence=0):
     conn = sqlite3.connect('data/feedback.db')
     cursor = conn.cursor()
+    
     # Generate timestamp with milliseconds for precise ordering
     from datetime import datetime
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]  # Keep 3 decimal places for milliseconds
+    
+    # Insert new notification
     cursor.execute('''
         INSERT INTO notifications (timestamp, level, user_id, message, details, sequence)
         VALUES (?, ?, ?, ?, ?, ?)
     ''', (timestamp, level, user_id, message, details, sequence))
+    
+    # Keep only last 100 notifications (delete oldest)
+    # This prevents the database from growing infinitely
+    cursor.execute('''
+        DELETE FROM notifications 
+        WHERE id NOT IN (
+            SELECT id FROM notifications 
+            ORDER BY sequence DESC, timestamp DESC, id DESC 
+            LIMIT 100
+        )
+    ''')
+    
     conn.commit()
     conn.close()
 
