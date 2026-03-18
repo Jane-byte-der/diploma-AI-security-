@@ -860,26 +860,34 @@
             document.getElementById('results').style.display = 'block';
             
             // Display statistics
-            const stats = data.statistics;
-            const statsHtml = `
-                <div class="stat-card">
-                    <div class="stat-value">${stats.total_events || 0}</div>
-                    <div class="stat-label">Total Events</div>
-                </div>
-                <div class="stat-card high">
-                    <div class="stat-value">${stats.total_anomalies || 0}</div>
-                    <div class="stat-label">Anomalies Detected</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">${stats.anomaly_rate || 0}%</div>
-                    <div class="stat-label">Anomaly Rate</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">${Object.keys(stats.by_user || {}).length || 0}</div>
-                    <div class="stat-label">Affected Users</div>
-                </div>
-            `;
-            document.getElementById('stats').innerHTML = statsHtml;
+const stats = data.statistics;
+const statsHtml = `
+    <div class="stat-card">
+        <div class="stat-value" id="stat-total-events">0</div>
+        <div class="stat-label">Total Events</div>
+    </div>
+    <div class="stat-card high">
+        <div class="stat-value" id="stat-total-anomalies">0</div>
+        <div class="stat-label">Anomalies Detected</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="stat-anomaly-rate">0%</div>
+        <div class="stat-label">Anomaly Rate</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="stat-affected-users">0</div>
+        <div class="stat-label">Affected Users</div>
+    </div>
+`;
+document.getElementById('stats').innerHTML = statsHtml;
+
+// Animate counters after displaying
+setTimeout(() => {
+    animateValue(document.getElementById('stat-total-events'), 0, stats.total_events || 0, 1000);
+    animateValue(document.getElementById('stat-total-anomalies'), 0, stats.total_anomalies || 0, 1000);
+    animateValue(document.getElementById('stat-anomaly-rate'), 0, stats.anomaly_rate || 0, 1000);
+    animateValue(document.getElementById('stat-affected-users'), 0, Object.keys(stats.by_user || {}).length || 0, 1000);
+}, 100);
             
             // Display results table
             const tbody = document.getElementById('tableBody');
