@@ -1709,6 +1709,7 @@ function toggleTheme() {
     document.body.classList.toggle('dark-mode');
     const btn = document.querySelector('.theme-toggle');
     btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    updateChartTheme();  // update chart colors
 }
     </script>
 </body>
