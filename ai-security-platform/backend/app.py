@@ -269,11 +269,11 @@ def get_notifications():
     """Get recent notifications with proper ordering"""
     conn = sqlite3.connect('data/feedback.db')
     cursor = conn.cursor()
-    # Order by sequence first (smaller = earlier), then by id (newer first for same sequence)
+    # Order by: sequence first (groups attacks), then timestamp (milliseconds precision), then id (final tie-breaker)
     cursor.execute('''
         SELECT timestamp, level, user_id, message, details, sequence
         FROM notifications 
-        ORDER BY sequence DESC, id DESC
+        ORDER BY sequence DESC, timestamp DESC, id DESC
         LIMIT 50
     ''')
     rows = cursor.fetchall()
