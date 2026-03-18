@@ -1065,7 +1065,7 @@ function updateStatistics() {
 }
 
 // ===== ATTACK SIMULATOR =====
-function simulateAttack(type) {
+async function simulateAttack(type) {
     const statusDiv = document.getElementById('simulatorStatus');
     const buttons = document.querySelectorAll('.simulator-btn');
     
@@ -1111,9 +1111,41 @@ function simulateAttack(type) {
     statusDiv.innerHTML = `<span style="color: #4ade80;">⚡</span> ${message}`;
     statusDiv.style.animation = 'glow 2s infinite';
     
+    // Enrich events with backend details
+    let eventsToAdd = newEvents;
+    
+    try {
+        const enrichedEvents = [];
+        for (const ev of newEvents) {
+            const response = await fetch('/generate_details', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    anomaly_type: ev.type,
+                    user: ev.user,
+                    ip: ev.ip,
+                    size: ev.size
+                })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                enrichedEvents.push({
+                    ...ev,
+                    details: data.details ? JSON.stringify(data.details) : ''
+                });
+            } else {
+                enrichedEvents.push(ev);
+            }
+        }
+        eventsToAdd = enrichedEvents;
+    } catch (error) {
+        console.warn('Failed to enrich events, using raw events:', error);
+    }
+    
     // Add events to currentResults and update display
     setTimeout(() => {
-    newEvents.forEach(ev => {
+    eventsToAdd.forEach(ev => {
         // Determine user role based on user_id
         let user_role = 'Unknown';
         if (ev.user === 'IVANOV_ADM') user_role = 'Administrator';
@@ -1144,13 +1176,13 @@ function simulateAttack(type) {
             anomaly_types: ev.type,
             severity: ev.severity,
             is_anomaly: true,
-            details: ''
+            details: ev.details || ''  // ← NOW DETAILS COME FROM SERVER!
         };
         currentResults.push(newResult);
     });
     
-    console.log('Admin attack - events to add:', newEvents.length);
-    console.log('Events added:', newEvents.map(e => e.type));
+    console.log('Admin attack - events to add:', eventsToAdd.length);
+    console.log('Events added:', eventsToAdd.map(e => e.type));
     console.log('Total after add:', currentResults.length);
     
     // Send notifications to server with sequence (NOW INSIDE setTimeout)
