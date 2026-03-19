@@ -699,13 +699,63 @@ body.dark-mode {
     color: #f0f0f0;
 }
 
+/* Dark theme with REAL NEON effect */
 body.dark-mode header,
+body.dark-mode .upload-area {
+    background: linear-gradient(135deg, #8a2be2, #4b0082);
+    color: white;
+    border: none;
+    position: relative;
+    animation: neonBreathing 3s infinite ease-in-out;
+}
+
+body.dark-mode header::before,
+body.dark-mode .upload-area::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #b721ff, #6b21ff);
+    border-radius: 17px;
+    z-index: -1;
+    animation: neonBorder 3s infinite;
+}
+
 body.dark-mode .results,
-body.dark-mode .upload-area,
 body.dark-mode .notifications-panel {
     background: #2d2d2d;
     color: #f0f0f0;
     border-color: #404040;
+}
+
+@keyframes neonBreathing {
+    0% { box-shadow: 0 0 30px #b721ff, 0 0 60px #8a2be2; }
+    50% { box-shadow: 0 0 50px #b721ff, 0 0 90px #8a2be2, 0 0 120px #4b0082; }
+    100% { box-shadow: 0 0 30px #b721ff, 0 0 60px #8a2be2; }
+}
+
+@keyframes neonBorder {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Keep header text visible */
+body.dark-mode header h1,
+body.dark-mode header .subtitle {
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+/* Keep upload area text visible */
+body.dark-mode .upload-area h2,
+body.dark-mode .upload-area p {
+    color: white;
+    position: relative;
+    z-index: 2;
 }
 
 body.dark-mode .stat-card {
