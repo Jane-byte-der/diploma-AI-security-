@@ -51,7 +51,7 @@ class FeedbackDatabase:
             )
         ''')
         
-        # Таблица для истории обучения
+        # Table for training history
         c.execute('''
             CREATE TABLE IF NOT EXISTS training_history (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
