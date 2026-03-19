@@ -112,7 +112,7 @@ def analyze():
         temp_path = f"/tmp/{datetime.now().timestamp()}.csv"
         file.save(temp_path)
         
-        # Загружаем данные
+        # Load data
         df = detector.load_data(temp_path)
         
         # Строим профили
