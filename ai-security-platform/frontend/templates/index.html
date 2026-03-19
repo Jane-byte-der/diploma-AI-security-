@@ -723,20 +723,21 @@ header .subtitle {
 }
 
 .badge-secondary {
-    background: rgba(102,126,234,0.1);
-    color: #667eea;
+    background: #667eea;  /* bright purple-blue from header */
+    color: white;         /* white text for contrast */
     padding: 5px 15px;
     border-radius: 30px;
     font-size: 12px;
     font-weight: bold;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(102,126,234,0.3);
+    border: none;
+    box-shadow: 0 4px 12px rgba(102,126,234,0.4);  /* soft glow */
     transition: all 0.3s ease;
 }
 
 .badge-secondary:hover {
-    background: rgba(102,126,234,0.15);
-    border-color: #667eea;
+    background: #764ba2;  /* darker purple on hover */
+    box-shadow: 0 6px 16px rgba(118,75,162,0.5);
+    transform: translateY(-2px);
 }
 
 /* Dark theme styles */
