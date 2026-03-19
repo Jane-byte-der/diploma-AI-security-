@@ -1954,23 +1954,45 @@ function update3DChart(events) {
         }
     });
     
+    // Function to get dominant color based on anomaly type
+    function getDominantColor(hour, events) {
+        const types = { intensity: 0, spatial: 0, temporal: 0 };
+        events.forEach(event => {
+            const eventHour = parseInt(event.timestamp.split(' ')[1].split(':')[0]);
+            if (eventHour === hour && event.is_anomaly) {
+                if (event.anomaly_types.includes('intensity')) types.intensity++;
+                if (event.anomaly_types.includes('spatial')) types.spatial++;
+                if (event.anomaly_types.includes('temporal')) types.temporal++;
+            }
+        });
+        
+        // Return color based on dominant type
+        if (types.intensity >= types.spatial && types.intensity >= types.temporal) return 0xff4757;  // bright red for intensity
+        if (types.spatial >= types.intensity && types.spatial >= types.temporal) return 0x1e90ff;    // bright blue for spatial
+        if (types.temporal >= types.intensity && types.temporal >= types.spatial) return 0xbf55ff;    // bright purple for temporal
+        return 0x95a5a6;  // gray for mixed types
+    }
+    
     // Create new bars
-    const colors = [0x8a2be2, 0x9370db, 0xba55d3, 0xda70d6];
     const barWidth = 0.9;
-    const spacing = 1.2;
-    const startX = -12;
+    const spacing = 1.5;
+    const startX = -15;
     
     for (let i = 0; i < 24; i++) {
         if (hourData[i] === 0) continue;
         
-        const height = Math.min(hourData[i] * 2, 5);
+        const height = Math.min(hourData[i] * 1.5, 6);
+        const barColor = getDominantColor(i, events);
+        const opacity = Math.min(0.5 + (hourData[i] / 10), 0.95);  // opacity based on confidence
+        
         const geometry = new THREE.BoxGeometry(barWidth, height, barWidth);
         const material = new THREE.MeshPhongMaterial({ 
-            color: colors[i % colors.length],
-            emissive: hourData[i] > 2 ? 0x331100 : 0x000000,
+            color: barColor,
+            emissive: hourData[i] > 2 ? barColor : 0x000000,  // glow for peak hours
+            emissiveIntensity: 0.3,
             shininess: 30,
             transparent: true,
-            opacity: 0.9
+            opacity: opacity
         });
         
         const bar = new THREE.Mesh(geometry, material);
@@ -1983,21 +2005,23 @@ function update3DChart(events) {
         scene.add(bar);
         bars.push(bar);
         
-        // Add label
+        // Add label with hour and count
         const canvas = document.createElement('canvas');
-        canvas.width = 64;
-        canvas.height = 64;
+        canvas.width = 128;
+        canvas.height = 128;
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = 'white';
+        ctx.font = 'bold 24px Arial';
+        ctx.fillText(`${i}:00`, 20, 40);
         ctx.font = 'bold 20px Arial';
-        ctx.fillText(i.toString(), 20, 40);
+        ctx.fillText(`${hourData[i]}`, 50, 80);
         
         const texture = new THREE.CanvasTexture(canvas);
         const labelMaterial = new THREE.SpriteMaterial({ map: texture });
         const sprite = new THREE.Sprite(labelMaterial);
-        sprite.scale.set(1, 1, 1);
+        sprite.scale.set(1.5, 1.5, 1);
         sprite.position.x = startX + i * spacing;
-        sprite.position.y = height + 0.5;
+        sprite.position.y = height + 1;
         sprite.position.z = 0;
         
         scene.add(sprite);
