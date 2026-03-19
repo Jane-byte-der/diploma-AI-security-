@@ -458,6 +458,7 @@ This live application is not just a demonstration prototype but a practical impl
 
 *   **Confirmation of Table 3.6** — when loading the test dataset, the system detects anomalies with accuracy comparable to the results described in section 3.2.4.
 *   **Implementation of the "Human-in-the-loop" principle** — the built-in feedback mechanism directly corresponds to the organizational and personnel recommendations from section 2.3.1.
+*   **Attack Simulation** — an interactive simulator of three types of attacks (insider, phishing, admin compromise) fully corresponds to the pilot project scenarios described in Section 3.2.3 and demonstrates the algorithms' operation in real time.
 *   **Proof of Effectiveness** — the publicly accessible service serves as undeniable evidence of the proposed methodology's viability and the correctness of the software code.
 
 ## 🧠 Methodology Highlights
