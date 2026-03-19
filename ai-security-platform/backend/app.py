@@ -200,7 +200,7 @@ def download_pdf():
     styles = getSampleStyleSheet()
     story = []
     
-    # Заголовок
+    # Title
     title_style = ParagraphStyle(
         'CustomTitle',
         parent=styles['Title'],
