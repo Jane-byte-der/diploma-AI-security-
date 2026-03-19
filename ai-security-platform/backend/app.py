@@ -135,7 +135,7 @@ def analyze():
         add_notification('info', None, f"Analysis complete", 
                         f"{len(results)} events, {len(anomalies_df)} anomalies")
 
-        # Получаем статистику
+        # Get statistics
         stats = detector.get_statistics(results)
         
         # Матрица ошибок (если есть ground truth)
