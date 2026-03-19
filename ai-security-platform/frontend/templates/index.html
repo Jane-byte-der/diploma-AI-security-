@@ -1695,11 +1695,22 @@ function updateChartTheme() {
         window.userChartInstance.options.scales.y.grid.color = gridColor;
         window.userChartInstance.options.scales.x.ticks.color = textColor;
         window.userChartInstance.options.scales.y.ticks.color = textColor;
+        window.userChartInstance.options.plugins.legend.labels.color = textColor;
+        window.userChartInstance.options.plugins.title = {
+            display: true,
+            text: 'Events by User',
+            color: textColor
+        };
         window.userChartInstance.update();
     }
     
     if (window.typeChartInstance) {
         window.typeChartInstance.options.plugins.legend.labels.color = textColor;
+        window.typeChartInstance.options.plugins.title = {
+            display: true,
+            text: 'Anomaly Types',
+            color: textColor
+        };
         window.typeChartInstance.update();
     }
 }
