@@ -1196,25 +1196,37 @@ function drawCharts(events) {
         }
     });
     
-    // Create bar chart for users
-    const userCtx = document.getElementById('userChart')?.getContext('2d');
-    if (userCtx) {
-        window.userChartInstance = new Chart(userCtx, {
-            type: 'bar',
-            data: {
-                labels: Object.keys(userCounts),
-                datasets: [{
-                    label: 'Events by User',
-                    data: Object.values(userCounts),
-                    backgroundColor: '#3498db'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
+// Create bar chart for users
+const userCtx = document.getElementById('userChart')?.getContext('2d');
+if (userCtx) {
+    window.userChartInstance = new Chart(userCtx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(userCounts),
+            datasets: [{
+                label: 'Events by User',
+                data: Object.values(userCounts),
+                backgroundColor: '#3498db'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Events by User',
+                    color: document.body.classList.contains('dark-mode') ? '#ffffff' : '#333'
+                },
+                legend: {
+                    labels: {
+                        color: document.body.classList.contains('dark-mode') ? '#ffffff' : '#333'
+                    }
+                }
             }
-        });
-    }
+        }
+    });
+}
     
     // Create pie chart for anomaly types
     const typeCtx = document.getElementById('typeChart')?.getContext('2d');
