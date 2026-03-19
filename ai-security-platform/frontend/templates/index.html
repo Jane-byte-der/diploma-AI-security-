@@ -1229,19 +1229,33 @@ if (userCtx) {
 }
     
     // Create pie chart for anomaly types
-    const typeCtx = document.getElementById('typeChart')?.getContext('2d');
-    if (typeCtx && Object.keys(typeCounts).length > 0) {
-        window.typeChartInstance = new Chart(typeCtx, {
-            type: 'pie',
-            data: {
-                labels: Object.keys(typeCounts),
-                datasets: [{
-                    data: Object.values(typeCounts),
-                    backgroundColor: ['#ff6b6b', '#f39c12', '#3498db', '#2ecc71', '#9b59b6']
-                }]
+const typeCtx = document.getElementById('typeChart')?.getContext('2d');
+if (typeCtx && Object.keys(typeCounts).length > 0) {
+    window.typeChartInstance = new Chart(typeCtx, {
+        type: 'pie',
+        data: {
+            labels: Object.keys(typeCounts),
+            datasets: [{
+                data: Object.values(typeCounts),
+                backgroundColor: ['#ff6b6b', '#f39c12', '#3498db', '#2ecc71', '#9b59b6']
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Anomaly Types',
+                    color: document.body.classList.contains('dark-mode') ? '#ffffff' : '#333'
+                },
+                legend: {
+                    labels: {
+                        color: document.body.classList.contains('dark-mode') ? '#ffffff' : '#333'
+                    }
+                }
             }
-        });
-    }
+        }
+    });
+}
     
     container.style.display = 'block';
 }
