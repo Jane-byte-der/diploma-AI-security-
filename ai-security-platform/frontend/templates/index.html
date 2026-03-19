@@ -46,21 +46,44 @@ header .subtitle {
 }
         
         .upload-area {
-    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    background: linear-gradient(135deg, #c7d2fe 0%, #f0e7fe 50%, #ffffff 100%);
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(102,126,234,0.15);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(102,126,234,0.25);
     text-align: center;
-    border: 2px dashed #667eea;
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg, #667eea, #a855f7, #ec4899);
+    border-image-slice: 1;
     margin-bottom: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    animation: shimmer 6s infinite;
+    pointer-events: none;
 }
 
 .upload-area:hover {
-    border-color: #764ba2;
-    background: linear-gradient(135deg, #ffffff, #f0f2ff);
-    box-shadow: 0 8px 25px rgba(102,126,234,0.25);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #d9e2ff 0%, #f8f0ff 70%, #ffffff 100%);
+    border-image: linear-gradient(135deg, #a855f7, #ec4899, #667eea);
+    border-image-slice: 1;
+    box-shadow: 0 20px 40px rgba(102,126,234,0.4);
+    transform: translateY(-4px) scale(1.01);
+}
+
+@keyframes shimmer {
+    0% { transform: rotate(0deg) scale(1); opacity: 0.3; }
+    50% { transform: rotate(180deg) scale(1.2); opacity: 0.5; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.3; }
 }
         
         input[type="file"] {
