@@ -1922,12 +1922,21 @@ function init3D() {
 function animate3D() {
     requestAnimationFrame(animate3D);
     
-    // Smooth camera rotation around the scene
-    if (camera) {
-        const time = Date.now() * 0.0005;  // slow rotation
-        camera.position.x = 10 * Math.sin(time);
-        camera.position.z = 10 * Math.cos(time);
-        camera.lookAt(0, 3, 0);
+    // Pulse effect for peak hours
+    if (bars && bars.length > 0) {
+        const time = Date.now() * 0.002;  // slow pulse
+        bars.forEach((bar, index) => {
+            // Check if it's a bar (not a sprite) and has material with emissive
+            if (bar.material && bar.material.emissive && bar.material.emissive.getHex() !== 0x000000) {
+                const pulse = Math.sin(time + index) * 0.2 + 0.8;
+                bar.material.emissiveIntensity = pulse;
+            }
+        });
+    }
+    
+    // Gentle rotation of the entire scene
+    if (scene) {
+        scene.rotation.y += 0.001;
     }
     
     if (renderer && scene && camera) {
