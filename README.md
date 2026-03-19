@@ -361,7 +361,7 @@ The web application is built on a classic client-server architecture and include
   - 📋 **Automated summary** — below the timeline, a concise list of hours with detected anomalies
 
 **Report export:**
-- 📄 **PDF report** — generates a document with statistics and an anomaly table (first 20 records)
+- 📄 **PDF report** — generates a document with statistics and an anomaly table (first 50 records)
 - 🎨 Row color coding is built-in:
   - 🔴 red — high severity
   - 🟡 yellow — medium severity
