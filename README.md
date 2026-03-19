@@ -486,7 +486,7 @@ This research includes both theoretical development and practical validation:
 
 ### Web Application (`ai-security-platform/`):
 - **`backend/`** — Flask server-side
-  - `__init__.py` — Empty file that makes the folder a Python package (critical for imports!)
+  - `__init__.py` — Empty file that makes the folder a Python package (critical for imports)
   - `app.py` — Main Flask application file
   - `anomaly_detector.py` — Anomaly detection module (system core)
   - `database.py` — SQLite database operations for storing feedback
