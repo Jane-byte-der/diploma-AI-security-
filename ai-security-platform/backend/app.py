@@ -244,7 +244,7 @@ def download_pdf():
     
     table = Table(table_data)
     
-    # Сначала стиль для заголовка
+    # Header style
     table.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#34495e')),
         ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
@@ -254,11 +254,11 @@ def download_pdf():
         ('BOTTOMPADDING', (0,0), (-1,0), 12),
     ]))
     
-    ## Цвета для строк с данными
+    ## Row colors for data
     for i, row in enumerate(table_data):
-        if i == 0:  # пропускаем заголовок
+        if i == 0:  # Skip header row
             continue
-        severity_value = row[4]  # столбец Severity
+        severity_value = row[4]  # Severity column
         if severity_value == 'high':
             bg_color = colors.HexColor('#ffebee')
         elif severity_value == 'medium':
