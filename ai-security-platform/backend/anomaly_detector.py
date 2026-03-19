@@ -87,19 +87,19 @@ class AnomalyDetector:
             logger.error(f"Ошибка загрузки данных: {e}")
             raise ValueError(f"Некорректный формат данных: {e}")
         
-        # Проверка обязательных колонок
+        # Check required columns
         required_columns = ['Timestamp', 'User_ID', 'User_Role', 'Event_Type', 
                            'Resource', 'IP_Address']
         missing = [col for col in required_columns if col not in df.columns]
         if missing:
             raise ValueError(f"Отсутствуют обязательные колонки: {missing}")
         
-        # Преобразование timestamp с обработкой ошибок
+        # Parse timestamp with error handling
         try:
             df['Timestamp_dt'] = pd.to_datetime(df['Timestamp'], 
                                                 format='%d.%m.%Y %H:%M', 
                                                 errors='coerce')
-            # Удаляем строки с некорректным временем
+            # Remove rows with invalid timestamps
             df = df.dropna(subset=['Timestamp_dt'])
             df['Hour'] = df['Timestamp_dt'].dt.hour
             df['Day'] = df['Timestamp_dt'].dt.day
@@ -108,12 +108,12 @@ class AnomalyDetector:
             logger.error(f"Ошибка парсинга timestamp: {e}")
             raise
         
-        # Определение типа IP
+        # Determine IP type
         df['IP_Type'] = df['IP_Address'].apply(
             lambda x: 'Internal' if str(x).startswith(self.config['internal_ip_prefix']) else 'External'
         )
         
-        # Обработка пропусков в Data_Size_KB
+        # Handle missing values in Data_Size_KB
         if 'Data_Size_KB' in df.columns:
             df['Data_Size_KB'] = pd.to_numeric(df['Data_Size_KB'], errors='coerce').fillna(0)
         else:
