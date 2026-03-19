@@ -495,7 +495,6 @@ This research includes both theoretical development and practical validation:
   - `templates/index.html` — Main page
   - `static/style.css` — Styles
   - `static/script.js` — Client-side logic
-  - `static/IMG_4141.png` and `IMG_4142.png` — Screenshots of the working application
 - **`data/`** — Synthetic test data
   - `sample_logs.csv` — Test dataset (Table 3.2 from the thesis)
 - **`requirements.txt`** — Web app dependencies (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
