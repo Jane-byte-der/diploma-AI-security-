@@ -846,6 +846,13 @@ body.dark-mode .badge-secondary {
 }
 
 .theme-toggle {
+    /* Fixed positioning relative to viewport */
+    position: fixed !important;
+    top: 30px !important;
+    right: 30px !important;
+    z-index: 9999 !important;
+    
+    /* Styling */
     background: rgba(255,255,255,0.2);
     border: 1px solid rgba(255,255,255,0.3);
     color: white;
@@ -855,6 +862,7 @@ body.dark-mode .badge-secondary {
     cursor: pointer;
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
+    user-select: none;  /* prevent text selection */
 }
 
 .theme-toggle:hover {
