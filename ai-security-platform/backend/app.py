@@ -115,7 +115,7 @@ def analyze():
         # Load data
         df = detector.load_data(temp_path)
         
-        # Строим профили
+        # Build user profiles
         profiles = detector.build_profiles(df)
         
         # Обнаруживаем аномалии
