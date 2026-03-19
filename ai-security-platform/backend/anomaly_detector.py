@@ -137,12 +137,12 @@ class AnomalyDetector:
         for user in df['User_ID'].unique():
             user_data = df[df['User_ID'] == user]
             
-            if len(user_data) < 2:  # Минимум данных для профиля
+            if len(user_data) < 2:  # Minimum data required for profile
                 logger.warning(f"Мало данных для пользователя {user}, пропускаем")
                 continue
             
             try:
-                # Определяем типичные параметры
+                # Determine typical parameters
                 work_hour_mode = user_data['Hour'].mode()
                 work_hour = int(work_hour_mode[0]) if not work_hour_mode.empty else 9
                 
@@ -152,7 +152,7 @@ class AnomalyDetector:
                 profiles[user] = {
                     'role': user_data['User_Role'].iloc[0] if not user_data.empty else 'Unknown',
                     'work_hours_start': work_hour,
-                    'work_hours_end': work_hour + 8,  # Предполагаем 8-часовой рабочий день
+                    'work_hours_end': work_hour + 8,  # Assume 8-hour workday
                     'internal_ip_prefix': self._extract_ip_prefix(typical_ip),
                     'avg_data_size': float(user_data['Data_Size_KB'].mean()),
                     'std_data_size': float(user_data['Data_Size_KB'].std()),
@@ -202,7 +202,7 @@ class AnomalyDetector:
             profile = self.profiles.get(user)
             
             if not profile:
-                # Для неизвестных пользователей - помечаем как потенциальные аномалии
+                # Mark unknown users as potential anomalies
                 results.append(self._create_result_row(event, ['unknown_user'], 'medium', idx))
                 continue
             
@@ -210,21 +210,21 @@ class AnomalyDetector:
             severity = 'low'
             details = {}
             
-            # Проверка времени (temporal anomaly)
+            # Check temporal anomaly
             hour = event['Hour']
             if hour < profile['work_hours_start'] or hour > profile['work_hours_end']:
                 anomalies_found.append('temporal')
                 details['expected_hours'] = f"{profile['work_hours_start']}-{profile['work_hours_end']}"
                 severity = 'medium'
             
-            # Проверка IP (spatial anomaly)
+            # Check spatial anomaly
             ip = str(event['IP_Address'])
             if not ip.startswith(profile['internal_ip_prefix']):
                 anomalies_found.append('spatial')
                 details['expected_ip_prefix'] = profile['internal_ip_prefix']
                 severity = 'high' if 'temporal' in anomalies_found else 'medium'
             
-            # Проверка объема данных (intensity anomaly)
+            # Check intensity anomaly
             volume = event.get('Data_Size_KB', 0)
             if volume > 0:
                 threshold = profile['avg_data_size'] * self.config['threshold_multiplier']
@@ -234,20 +234,20 @@ class AnomalyDetector:
                     details['threshold'] = round(threshold, 2)
                     severity = 'high'
             
-            # Проверка ресурсов (resource anomaly)
+            # Check resource anomaly
             resource = str(event['Resource'])
             if profile['typical_resources'] and resource not in profile['typical_resources']:
-                if len(anomalies_found) >= 1:  # Только если уже есть другие аномалии
+                if len(anomalies_found) >= 1:  # Only if other anomalies already exist
                     anomalies_found.append('resource')
                     severity = 'high' if severity == 'high' else 'medium'
             
-            # Формируем результат
+            # Generate result
             result = self._create_result_row(
                 event, anomalies_found, severity, idx, details
             )
             results.append(result)
             
-            # Сохраняем в историю для дальнейшего обучения
+            # Save to history for future training
             if anomalies_found:
                 self.anomaly_history.append(result)
         
@@ -293,7 +293,7 @@ class AnomalyDetector:
         
         anomalies = results_df[results_df['is_anomaly']]
         
-        # Распределение по типам аномалий
+        # Distribution by anomaly type
         type_counts = {}
         for types in anomalies['anomaly_types']:
             for t in str(types).split(','):
