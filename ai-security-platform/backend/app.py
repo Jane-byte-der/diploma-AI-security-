@@ -230,7 +230,7 @@ def download_pdf():
     
     # Таблица
     table_data = [['Timestamp', 'User', 'Event', 'Anomaly Types', 'Severity']]
-    for _, row in current_results.head(20).iterrows():
+    for _, row in current_results.head(50).iterrows():
         severity = row['severity']
         severity_display = severity
             
