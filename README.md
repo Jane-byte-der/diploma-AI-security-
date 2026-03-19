@@ -24,7 +24,6 @@
   - `templates/index.html` — главная страница
   - `static/style.css` — стили
   - `static/script.js` — логика на клиенте
-  - `static/IMG_4141.png` и `IMG_4142.png` — скриншоты работающего приложения
 - **`data/`** — синтетические данные для тестирования
   - `sample_logs.csv` — тестовый датасет (таблица 3.2 из диплома)
 - **`requirements.txt`** — зависимости для веб-приложения (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
