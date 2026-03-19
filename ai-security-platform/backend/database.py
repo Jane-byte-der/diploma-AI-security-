@@ -37,7 +37,7 @@ class FeedbackDatabase:
             )
         ''')
         
-        # Таблица для хранения всех обнаружений
+        # Table for storing all detections
         c.execute('''
             CREATE TABLE IF NOT EXISTS detections (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
