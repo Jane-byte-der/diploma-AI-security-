@@ -228,7 +228,7 @@ def download_pdf():
     story.append(Paragraph(f"Normal events: {normal}", stats_style))
     story.append(Spacer(1, 0.2*inch))
     
-    # Таблица
+    # Table
     table_data = [['Timestamp', 'User', 'Event', 'Anomaly Types', 'Severity']]
     for _, row in current_results.head(50).iterrows():
         severity = row['severity']
