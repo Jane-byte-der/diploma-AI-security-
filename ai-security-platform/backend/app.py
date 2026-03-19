@@ -118,7 +118,7 @@ def analyze():
         # Build user profiles
         profiles = detector.build_profiles(df)
         
-        # Обнаруживаем аномалии
+        # Detect anomalies
         results = detector.detect_anomalies(df)
         current_results = results
         
