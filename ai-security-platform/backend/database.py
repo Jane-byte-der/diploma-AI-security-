@@ -23,7 +23,7 @@ class FeedbackDatabase:
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         
-        # Таблица для обратной связи от аналитиков
+        # Table for analyst feedback
         c.execute('''
             CREATE TABLE IF NOT EXISTS analyst_feedback (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
