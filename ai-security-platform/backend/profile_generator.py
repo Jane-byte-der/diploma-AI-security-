@@ -45,7 +45,7 @@ class ProfileGenerator:
             if len(user_data) < 5:
                 continue
             
-            # Признаки для кластеризации
+            # Features for clustering
             features = [
                 user_data['Hour'].mean(),  # среднее время входа
                 user_data['Hour'].std(),   # вариативность времени
@@ -78,13 +78,13 @@ class ProfileGenerator:
             logger.warning("Недостаточно данных для кластеризации")
             return {}
         
-        # Нормализация признаков
+        # Feature normalization
         features_scaled = self.scaler.fit_transform(features)
         
-        # Кластеризация
+        # Clustering
         self.cluster_labels = self.kmeans.fit_predict(features_scaled)
         
-        # Формируем профили по кластерам
+        # Generate profiles from clusters
         profiles = {}
         for cluster_id in range(self.n_clusters):
             cluster_users = [user_names[i] for i in range(len(user_names)) 
@@ -95,7 +95,7 @@ class ProfileGenerator:
             
             cluster_data = df[df['User_ID'].isin(cluster_users)]
             
-            # Определяем типовые характеристики кластера
+            # Determine typical cluster characteristics
             profiles[f'Role_{cluster_id+1}'] = {
                 'users': cluster_users,
                 'size': len(cluster_users),
@@ -108,7 +108,7 @@ class ProfileGenerator:
                 'total_events': len(cluster_data),
             }
             
-            # Пытаемся определить реальную роль по пользователям
+            # Attempt to determine actual role based on users
             roles_in_cluster = cluster_data['User_Role'].value_counts()
             if not roles_in_cluster.empty:
                 profiles[f'Role_{cluster_id+1}']['suggested_role'] = roles_in_cluster.index[0]
@@ -123,7 +123,7 @@ class ProfileGenerator:
         if len(hours) < 2:
             return "Unknown"
         
-        # Берем часы с наибольшей активностью
+        # Take hours with highest activity
         peak_hours = hours[hours > hours.quantile(0.7)].index.tolist()
         if peak_hours:
             return f"{min(peak_hours)}-{max(peak_hours)}"
@@ -144,7 +144,7 @@ class ProfileGenerator:
         if not self.profiles:
             return None, 0
         
-        # Извлекаем признаки пользователя
+        # Extract user features
         features = np.array([[
             user_data['Hour'].mean(),
             user_data['Hour'].std(),
@@ -156,13 +156,13 @@ class ProfileGenerator:
             user_data['Resource'].nunique(),
         ]])
         
-        # Нормализуем
+        # Normalize
         features_scaled = self.scaler.transform(features)
         
-        # Предсказываем кластер
+        # Predict cluster
         cluster = self.kmeans.predict(features_scaled)[0]
         
-        # Определяем уверенность (расстояние до центроида)
+        # Determine confidence (distance to centroid)
         distances = self.kmeans.transform(features_scaled)[0]
         confidence = 1 - (distances[cluster] / distances.sum())
         
