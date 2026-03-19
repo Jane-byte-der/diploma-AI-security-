@@ -210,7 +210,7 @@ def download_pdf():
     )
     story.append(Paragraph("Anomaly Detection Report", title_style))
     
-    # Статистика
+    # Statistics
     stats_style = ParagraphStyle(
         'Stats',
         parent=styles['Normal'],
