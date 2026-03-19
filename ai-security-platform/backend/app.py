@@ -150,7 +150,7 @@ def analyze():
             'success': True,
             'statistics': stats,
             'confusion_matrix': confusion,
-            'results': results.head(20).to_dict('records'),  # первые 20 для预览
+            'results': results.head(20).to_dict('records'),  # Preview first 20 records
             'total_results': len(results),
             'profiles': profiles
         })
