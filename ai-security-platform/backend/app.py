@@ -108,7 +108,7 @@ def analyze():
         if file.filename == '':
             return jsonify({'error': 'Файл не выбран'}), 400
         
-        # Сохраняем временно
+        # Save temporary file
         temp_path = f"/tmp/{datetime.now().timestamp()}.csv"
         file.save(temp_path)
         
