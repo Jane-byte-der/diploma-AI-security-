@@ -46,18 +46,22 @@ header .subtitle {
 }
         
         .upload-area {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 2px dashed #bdc3c7;
-            margin-bottom: 20px;
-        }
-        
-        .upload-area:hover {
-            border-color: #3498db;
-        }
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(102,126,234,0.15);
+    text-align: center;
+    border: 2px dashed #667eea;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: #764ba2;
+    background: linear-gradient(135deg, #ffffff, #f0f2ff);
+    box-shadow: 0 8px 25px rgba(102,126,234,0.25);
+    transform: translateY(-2px);
+}
         
         input[type="file"] {
             margin: 20px 0;
