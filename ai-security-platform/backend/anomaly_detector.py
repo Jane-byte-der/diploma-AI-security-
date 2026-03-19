@@ -10,7 +10,7 @@ from datetime import datetime
 import logging
 from typing import Dict, List, Optional, Tuple
 
-# Настройка логирования
+# Logging configuration
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -35,10 +35,10 @@ class AnomalyDetector:
         Args:
             config: Словарь с параметрами конфигурации
         """
-        self.profiles = {}  # профили пользователей
-        self.anomaly_history = []  # история обнаружений для обучения
+        self.profiles = {}  # User profiles
+        self.anomaly_history = []  # Detection history for training
         
-        # Типы аномалий (Таблица 3.5 из диплома)
+        # Anomaly types (Table 3.5 from thesis)
         self.anomaly_types = {
             'temporal': 'Временная аномалия',
             'spatial': 'Пространственная аномалия',
@@ -47,15 +47,15 @@ class AnomalyDetector:
             'behavioral': 'Поведенческая аномалия'
         }
         
-        # Конфигурация с значениями по умолчанию
+        # Default configuration
         self.config = {
-            'threshold_multiplier': 2.0,  # множитель для объема данных
-            'time_window_start': 8,        # начало рабочего дня (по умолчанию)
-            'time_window_end': 19,         # конец рабочего дня
-            'internal_ip_prefix': '10.',   # префикс внутренних IP
-            'max_data_size_kb': 100000,    # макс размер данных для анализа
+            'threshold_multiplier': 2.0,  # Data volume multiplier
+            'time_window_start': 8,        # Workday start (default)
+            'time_window_end': 19,         # Workday end
+            'internal_ip_prefix': '10.',   # Internal IP prefix
+            'max_data_size_kb': 100000,    # Max data size for analysis
             'enable_logging': True,
-            'min_history_days': 30,        # мин дней для построения профиля
+            'min_history_days': 30,        # Min days for profile building
         }
         
         if config:
