@@ -272,7 +272,7 @@ def download_pdf():
             ('BACKGROUND', (0,i), (-1,i), bg_color)
         ]))
     
-    # Сетка
+    # Grid lines
     table.setStyle(TableStyle([
         ('GRID', (0,0), (-1,-1), 1, colors.HexColor('#bdc3c7'))
     ]))
