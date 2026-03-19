@@ -1180,6 +1180,7 @@ setTimeout(() => {
            currentResults = data.results;
             drawTimeline(data.results);
             drawCharts(data.results);
+            updateNetwork(data.results);  // Update attack network
             
             // Highlight new anomalies with pulse effect
             setTimeout(() => {
