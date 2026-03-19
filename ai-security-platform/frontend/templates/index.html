@@ -1921,6 +1921,15 @@ function init3D() {
 
 function animate3D() {
     requestAnimationFrame(animate3D);
+    
+    // Smooth camera rotation around the scene
+    if (camera) {
+        const time = Date.now() * 0.0005;  // slow rotation
+        camera.position.x = 10 * Math.sin(time);
+        camera.position.z = 10 * Math.cos(time);
+        camera.lookAt(0, 3, 0);
+    }
+    
     if (renderer && scene && camera) {
         renderer.render(scene, camera);
     }
