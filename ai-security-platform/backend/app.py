@@ -138,7 +138,7 @@ def analyze():
         # Get statistics
         stats = detector.get_statistics(results)
         
-        # Матрица ошибок (если есть ground truth)
+        # Confusion matrix if ground truth is available
         confusion = {}
         if 'Is_Anomaly' in df.columns:
             confusion = detector.get_confusion_matrix(results)
