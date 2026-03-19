@@ -143,7 +143,7 @@ def analyze():
         if 'Is_Anomaly' in df.columns:
             confusion = detector.get_confusion_matrix(results)
         
-        # Очищаем временный файл
+        # Remove temporary file
         os.remove(temp_path)
         
         return jsonify({
