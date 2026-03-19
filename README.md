@@ -395,7 +395,7 @@ Each time a simulator button is clicked, the following components update automat
 - One click deletes all records from the database
 - The system asks for confirmation before deletion
 
-### 🧹 Automatic Database Management
+### ⚖️ Automatic Database Management
 - The database maintains only the latest **100 notifications**
 - Old records are automatically deleted when new ones are added
 - This prevents unlimited database growth and optimizes performance
