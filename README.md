@@ -411,14 +411,6 @@ Each time a simulator button is clicked, the following components update automat
 - All events are saved with millisecond precision
 - Ensures correct ordering even during rapid consecutive attacks
 
-**Testing Results:**
-Testing on the synthetic dataset (Table 3.2) yielded the following results:
-- Successfully loaded and processed 10 security events
-- Built profiles for 3 users (IVANOV_ADM, PETROV_BUH, SIDOROV_DEV)
-- Detected 6 anomalies of varying severity
-- Implemented event labeling and feedback storage
-- Processing time under 1 second, confirming real-time capability
-
 ## ☁️ Cloud Deployment (Render)
 
 A key outcome of the practical part of the thesis was the development of a **fully functional web application** and its deployment in a cloud environment. The application is available for testing without the need for local installation.
