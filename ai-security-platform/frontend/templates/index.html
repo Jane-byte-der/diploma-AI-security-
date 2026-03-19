@@ -1870,6 +1870,216 @@ function updateChartTheme() {
     }
 }
 
+// ===== ATTACK NETWORK VISUALIZATION =====
+let networkScene, networkCamera, networkRenderer, networkNodes = [], networkLinks = [];
+
+function initNetwork() {
+    const container = document.getElementById('network-canvas');
+    if (!container) return;
+    
+    // Setup scene
+    networkScene = new THREE.Scene();
+    networkScene.background = new THREE.Color(0x0a0a0a);
+    
+    // Setup camera
+    networkCamera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+    networkCamera.position.set(20, 10, 20);
+    networkCamera.lookAt(0, 0, 0);
+    
+    // Setup renderer
+    networkRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    networkRenderer.setSize(container.clientWidth, container.clientHeight);
+    networkRenderer.shadowMap.enabled = true;
+    container.innerHTML = '';
+    container.appendChild(networkRenderer.domElement);
+    
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x404060);
+    networkScene.add(ambientLight);
+    
+    const light1 = new THREE.PointLight(0x667eea, 1);
+    light1.position.set(10, 10, 10);
+    networkScene.add(light1);
+    
+    const light2 = new THREE.PointLight(0xb721ff, 0.5);
+    light2.position.set(-10, 5, -10);
+    networkScene.add(light2);
+    
+    // Start animation
+    animateNetwork();
+}
+
+function animateNetwork() {
+    requestAnimationFrame(animateNetwork);
+    
+    // Slow rotation
+    if (networkScene) {
+        networkScene.rotation.y += 0.001;
+    }
+    
+    if (networkRenderer && networkScene && networkCamera) {
+        networkRenderer.render(networkScene, networkCamera);
+    }
+}
+
+function updateNetwork(events) {
+    if (!networkScene) initNetwork();
+    if (!networkScene) return;
+    
+    // Clear old nodes
+    networkNodes.forEach(node => networkScene.remove(node));
+    networkLinks.forEach(link => networkScene.remove(link));
+    networkNodes = [];
+    networkLinks = [];
+    
+    // Extract unique users and IPs
+    const users = new Set();
+    const ips = new Set();
+    const userAnomalyCount = {};
+    const ipConnections = {};
+    
+    events.forEach(event => {
+        if (event.is_anomaly) {
+            users.add(event.user_id);
+            ips.add(event.ip_address);
+            
+            userAnomalyCount[event.user_id] = (userAnomalyCount[event.user_id] || 0) + 1;
+            
+            if (!ipConnections[event.ip_address]) {
+                ipConnections[event.ip_address] = new Set();
+            }
+            ipConnections[event.ip_address].add(event.user_id);
+        }
+    });
+    
+    // Create user nodes (blue)
+    const userArray = Array.from(users);
+    const userPositions = {};
+    const radius = 8;
+    
+    userArray.forEach((user, i) => {
+        const angle = (i / userArray.length) * Math.PI * 2;
+        const x = Math.cos(angle) * radius;
+        const z = Math.sin(angle) * radius;
+        userPositions[user] = { x, z };
+        
+        // Node size based on anomaly count
+        const size = 0.5 + (userAnomalyCount[user] || 0) * 0.2;
+        
+        const geometry = new THREE.SphereGeometry(size, 32, 32);
+        const material = new THREE.MeshPhongMaterial({ 
+            color: 0x4287f5,
+            emissive: 0x112244,
+            shininess: 30
+        });
+        
+        const sphere = new THREE.Mesh(geometry, material);
+        sphere.position.set(x, 0, z);
+        sphere.userData = { type: 'user', name: user };
+        
+        networkScene.add(sphere);
+        networkNodes.push(sphere);
+        
+        // Add label
+        const canvas = document.createElement('canvas');
+        canvas.width = 128;
+        canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 16px Arial';
+        ctx.fillText(user, 10, 30);
+        
+        const texture = new THREE.CanvasTexture(canvas);
+        const labelMaterial = new THREE.SpriteMaterial({ map: texture });
+        const sprite = new THREE.Sprite(labelMaterial);
+        sprite.scale.set(2, 1, 1);
+        sprite.position.set(x, 1.5, z);
+        
+        networkScene.add(sprite);
+        networkNodes.push(sprite);
+    });
+    
+    // Create IP nodes (red/purple)
+    const ipArray = Array.from(ips);
+    ipArray.forEach((ip, i) => {
+        const angle = (i / ipArray.length) * Math.PI * 2 + 0.5;
+        const x = Math.cos(angle) * (radius + 3);
+        const z = Math.sin(angle) * (radius + 3);
+        
+        // Determine if external IP
+        const isExternal = !ip.startsWith('10.');
+        const color = isExternal ? 0xff4757 : 0xbf55ff;
+        
+        const geometry = new THREE.SphereGeometry(0.6, 32, 32);
+        const material = new THREE.MeshPhongMaterial({ 
+            color: color,
+            emissive: isExternal ? 0x441111 : 0x221144
+        });
+        
+        const sphere = new THREE.Mesh(geometry, material);
+        sphere.position.set(x, 0.5, z);
+        sphere.userData = { type: 'ip', name: ip, external: isExternal };
+        
+        networkScene.add(sphere);
+        networkNodes.push(sphere);
+        
+        // Add label
+        const canvas = document.createElement('canvas');
+        canvas.width = 128;
+        canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 14px Arial';
+        ctx.fillText(ip.split('.').slice(0,2).join('.'), 10, 30);
+        
+        const texture = new THREE.CanvasTexture(canvas);
+        const labelMaterial = new THREE.SpriteMaterial({ map: texture });
+        const sprite = new THREE.Sprite(labelMaterial);
+        sprite.scale.set(2, 1, 1);
+        sprite.position.set(x, 1.2, z);
+        
+        networkScene.add(sprite);
+        networkNodes.push(sprite);
+    });
+    
+    // Create links between IPs and users
+    Object.keys(ipConnections).forEach(ip => {
+        const ipPos = ipArray.indexOf(ip);
+        const ipAngle = (ipPos / ipArray.length) * Math.PI * 2 + 0.5;
+        const ipX = Math.cos(ipAngle) * (radius + 3);
+        const ipZ = Math.sin(ipAngle) * (radius + 3);
+        
+        ipConnections[ip].forEach(user => {
+            const userPos = userArray.indexOf(user);
+            const userAngle = (userPos / userArray.length) * Math.PI * 2;
+            const userX = Math.cos(userAngle) * radius;
+            const userZ = Math.sin(userAngle) * radius;
+            
+            // Create a line between IP and user
+            const points = [
+                new THREE.Vector3(ipX, 0.5, ipZ),
+                new THREE.Vector3(userX, 0, userZ)
+            ];
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const material = new THREE.LineBasicMaterial({ color: 0x667eea, opacity: 0.5, transparent: true });
+            const line = new THREE.Line(geometry, material);
+            
+            networkScene.add(line);
+            networkLinks.push(line);
+        });
+    });
+}
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    const container = document.getElementById('network-canvas');
+    if (container && networkCamera && networkRenderer) {
+        networkCamera.aspect = container.clientWidth / container.clientHeight;
+        networkCamera.updateProjectionMatrix();
+        networkRenderer.setSize(container.clientWidth, container.clientHeight);
+    }
+});
+
 // Toggle dark theme
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
