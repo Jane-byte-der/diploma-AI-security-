@@ -220,7 +220,7 @@ python3 backend/app.py
 ![Титульный экран приложения](ai-security-platform/frontend/templates/IMG_4482.png)
 **Рисунок Б.1 — Титульный экран приложения**
 
-![Рабочая область приложения с панелью статистики и симулятором атак](ai-security-platform/frontend/templates/IMG_4502.png)
+![Рабочая область приложения с панелью статистики и симулятором атак](ai-security-platform/frontend/templates/IMG_4486.png)
 **Рисунок Б.2 — Рабочая область приложения с панелью статистики и симулятором атак**
 
 ![Детальный список аномалий с возможностью верификации](ai-security-platform/frontend/templates/IMG_4492.png)
