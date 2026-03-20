@@ -440,25 +440,33 @@ This tool fully implements the methodology described in Chapter 3 of the thesis,
 5.  **Provide Human-in-the-loop feedback** — the interface allows analysts to manually verify each anomaly by selecting a verdict (incident, suspicious, false positive). This data is saved and can be used for future model retraining.
 6.  **Simulate attacks** — use the simulator panel to add synthetic anomalies and observe system response in real time
 
-### 📸 Screenshots
+### 📸 Application Interface
 
 *Application interface after uploading and analyzing test data*
 
-![Main application screen](ai-security-platform/frontend/templates/IMG_4413.png)
-*Figure 1. File upload and analysis results display*
+![Application title screen](ai-security-platform/frontend/templates/IMG_4482.png)
+**Figure 1 — Application title screen**
 
-![Anomalies table](ai-security-platform/frontend/templates/IMG_4414.png)
-*Figure 2. Detailed list of anomalies with verification options*
+![Workspace with statistics panel and attack simulator](ai-security-platform/frontend/templates/IMG_4486.png)
+**Figure 2 — Workspace with statistics panel and attack simulator**
 
-![Analytics charts](ai-security-platform/frontend/templates/IMG_4415.png)
-*Figure 3. Analytics charts (bar and pie charts)*
+![Detailed anomaly list with verification options](ai-security-platform/frontend/templates/IMG_4414.png)
+**Figure 3 — Detailed anomaly list with verification options**
 
-![Interactive timeline](ai-security-platform/frontend/templates/IMG_4420.png)
-*Figure 4. Interactive timeline with hourly granularity and color coding*
+![Analytics charts (bar and pie charts)](ai-security-platform/frontend/templates/IMG_4415.png)
+**Figure 4 — Analytics charts (bar and pie charts)**
 
-![Notifications panel](ai-security-platform/frontend/templates/IMG_4434.png)
-*Figure 5. Notifications panel with color-coded events*
+![Interactive timeline with hourly granularity and color coding](ai-security-platform/frontend/templates/IMG_4420.png)
+**Figure 5 — Interactive timeline with hourly granularity and color coding**
 
+![Notifications panel with color-coded events](ai-security-platform/frontend/templates/IMG_4492.png)
+**Figure 6 — Notifications panel with color-coded events**
+
+![Application interface in dark mode](ai-security-platform/frontend/templates/IMG_4502.png)
+**Figure 7 — Application interface in dark mode**
+
+![Analytics charts in dark mode](ai-security-platform/frontend/templates/IMG_4497.png)
+**Figure 8 — Analytics charts in dark mode**
 #### 💡 Connection to the Thesis
 
 This live application is not just a demonstration prototype but a practical implementation of the study's key findings:
