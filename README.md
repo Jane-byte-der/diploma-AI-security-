@@ -217,28 +217,28 @@ python3 backend/app.py
 
 ### 📸 Интерфейс приложения
 
-![Титульный экран приложения](ai-security-platform/frontend/templates/4482.png)
+![Титульный экран приложения](ai-security-platform/frontend/templates/IMG_4482.png)
 **Рисунок Б.1 — Титульный экран приложения**
 
-![Рабочая область приложения с панелью статистики и симулятором атак](ai-security-platform/frontend/templates/4502.png)
+![Рабочая область приложения с панелью статистики и симулятором атак](ai-security-platform/frontend/templates/IMG_4502.png)
 **Рисунок Б.2 — Рабочая область приложения с панелью статистики и симулятором атак**
 
-![Детальный список аномалий с возможностью верификации](ai-security-platform/frontend/templates/4492.png)
+![Детальный список аномалий с возможностью верификации](ai-security-platform/frontend/templates/IMG_4492.png)
 **Рисунок Б.3 — Детальный список аномалий с возможностью верификации**
 
-![Аналитические графики (столбчатая и круговая диаграммы)](ai-security-platform/frontend/templates/4497.png)
+![Аналитические графики (столбчатая и круговая диаграммы)](ai-security-platform/frontend/templates/IMG_4497.png)
 **Рисунок Б.4 — Аналитические графики (столбчатая и круговая диаграммы)**
 
-![Интерактивный таймлайн с почасовой привязкой и цветовым кодированием](ai-security-platform/frontend/templates/4420.png)
+![Интерактивный таймлайн с почасовой привязкой и цветовым кодированием](ai-security-platform/frontend/templates/IMG_4420.png)
 **Рисунок Б.5 — Интерактивный таймлайн с почасовой привязкой и цветовым кодированием**
 
-![Панель уведомлений с цветовой индикацией событий](ai-security-platform/frontend/templates/4434.png)
+![Панель уведомлений с цветовой индикацией событий](ai-security-platform/frontend/templates/IMG_4434.png)
 **Рисунок Б.6 — Панель уведомлений с цветовой индикацией событий**
 
-![Интерфейс приложения в тёмном режиме](ai-security-platform/frontend/templates/4502.png)
+![Интерфейс приложения в тёмном режиме](ai-security-platform/frontend/templates/IMG_4502.png)
 **Рисунок Б.7 — Интерфейс приложения в тёмном режиме**
 
-![Аналитические графики в тёмном режиме](ai-security-platform/frontend/templates/4497.png)
+![Аналитические графики в тёмном режиме](ai-security-platform/frontend/templates/IMG_4497.png)
 **Рисунок Б.8 — Аналитические графики в тёмном режиме**
 
 ### 🧠 Соответствие дипломной работе
