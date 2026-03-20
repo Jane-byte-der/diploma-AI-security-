@@ -467,6 +467,7 @@ This tool fully implements the methodology described in Chapter 3 of the thesis,
 
 ![Analytics charts in dark mode](ai-security-platform/frontend/templates/IMG_4497.png)
 **Figure 8 — Analytics charts in dark mode**
+
 #### 💡 Connection to the Thesis
 
 This live application is not just a demonstration prototype but a practical implementation of the study's key findings:
