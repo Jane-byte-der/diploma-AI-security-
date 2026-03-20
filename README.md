@@ -232,7 +232,7 @@ python3 backend/app.py
 ![Интерактивный таймлайн с почасовой привязкой и цветовым кодированием](ai-security-platform/frontend/templates/IMG_4420.png)
 **Рисунок Б.5 — Интерактивный таймлайн с почасовой привязкой и цветовым кодированием**
 
-![Панель уведомлений с цветовой индикацией событий](ai-security-platform/frontend/templates/IMG_4434.png)
+![Панель уведомлений с цветовой индикацией событий](ai-security-platform/frontend/templates/IMG_4492.png)
 **Рисунок Б.6 — Панель уведомлений с цветовой индикацией событий**
 
 ![Интерфейс приложения в тёмном режиме](ai-security-platform/frontend/templates/IMG_4502.png)
