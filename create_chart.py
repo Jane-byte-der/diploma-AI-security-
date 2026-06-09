@@ -14,7 +14,7 @@ fig, ax = plt.subplots(figsize=(10, 6))
 bars1 = ax.bar(x - width/2, before, width, label='До внедрения ИИ', color='#ff9999')
 bars2 = ax.bar(x + width/2, after, width, label='После внедрения ИИ', color='#66b3ff')
 
-# Настройки
+# Settings
 ax.set_title('Сравнение эффективности', fontsize=16)
 ax.set_xticks(x)
 ax.set_xticklabels(categories)
