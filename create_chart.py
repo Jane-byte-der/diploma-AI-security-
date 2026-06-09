@@ -9,7 +9,7 @@ after = [0.5, 67]
 x = np.arange(len(categories))
 width = 0.35
 
-# График
+# Plot
 fig, ax = plt.subplots(figsize=(10, 6))
 bars1 = ax.bar(x - width/2, before, width, label='До внедрения ИИ', color='#ff9999')
 bars2 = ax.bar(x + width/2, after, width, label='После внедрения ИИ', color='#66b3ff')
