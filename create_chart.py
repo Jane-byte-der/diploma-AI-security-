@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Данные
+# Data
 categories = ['Время обнаружения (часы)', 'Ложные срабатывания (%)']
 before = [4.5, 94]
 after = [0.5, 67]
