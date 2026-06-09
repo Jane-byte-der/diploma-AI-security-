@@ -20,7 +20,7 @@ ax.set_xticks(x)
 ax.set_xticklabels(categories)
 ax.legend()
 
-# Цифры
+# Numbers
 for bar in bars1:
     height = bar.get_height()
     ax.annotate(f'{height}', xy=(bar.get_x() + bar.get_width()/2, height),
