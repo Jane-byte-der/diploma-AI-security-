@@ -6,7 +6,7 @@
 
 ### Web应用程序 (ai-security-platform/):
 - backend/ — 基于 Flask 的后端服务
-  - __init__.py — 将文件夹标记为 Python 包（对导入至关重要）
+  - init.py — 将文件夹标记为 Python 包（对导入至关重要）
   - app.py — Web应用程序主文件 (Flask)
   - anomaly_detector.py — 异常检测模块（系统核心）
   - database.py — 使用 SQLite 存储反馈数据
