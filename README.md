@@ -50,6 +50,7 @@
 
 ### 本地启动
 
+```bash
 # 克隆仓库
 git clone https://github.com/Jane-byte-der/diploma-AI-security-.git
 cd diploma-AI-security-/ai-security-platform
