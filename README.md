@@ -64,6 +64,7 @@ pip install -r requirements.txt
 
 # 启动应用程序
 python3 backend/app.py
+```
 
 ### 功能描述
 
