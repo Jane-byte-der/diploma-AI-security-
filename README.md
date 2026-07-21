@@ -1,17 +1,6 @@
 # Дипломная работа: Разработка методических рекомендаций по интеграции технологий искусственного интеллекта в систему управления информационной безопасностью
 
-Данный репозиторий содержит материалы, разработанные в ходе выполнения дипломной работы по интеграции искусственного интеллекта в системы управления информационной безопасностью (СУИБ). Здесь представлены аналитический модуль на основе Jupyter Notebook с реализацией алгоритмов обнаружения аномалий, веб-приложение на Flask, обеспечивающее интерактивный доступ к функционалу, а также синтетические данные, скрипты, графики и полная документация. Подробная структура и инструкции по запуску приведены в соответствующих разделах.
-
-## 📁 Структура репозитория
-
-### Корневые файлы:
-- `analysis_diploma.ipynb` — основной Jupyter Notebook с полным анализом данных
-- `requirements.txt` — список зависимостей Python для анализа
-- `runtime.txt` — фиксирует версию Python (3.12.8) для корректного деплоя на Render
-- `.gitignore` — служебный файл Git
-- `comparison_chart.png` — график сравнения эффективности до и после внедрения ИИ
-- `jupyter_analysis.png` — дополнительные графики из анализа
-- `create_chart.py` — скрипт для генерации графика сравнения
+Данный репозиторий содержит материалы, разработанные в ходе выполнения дипломной работы по интеграции искусственного интеллекта в системы управления информационной безопасностью (СУИБ).
 
 ### Веб-приложение (`ai-security-platform/`):
 - **`backend/`** — серверная часть на Flask
@@ -27,38 +16,6 @@
 - **`data/`** — синтетические данные для тестирования
   - `sample_logs.csv` — тестовый датасет (таблица 3.2 из диплома)
 - **`requirements.txt`** — зависимости для веб-приложения (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
-
-## 🚀 Анализ данных в Jupyter Notebook
-
-### Запуск Jupyter Notebook
-
-```bash
-# Скачать репозиторий
-git clone https://github.com/Jane-byte-der/diploma-AI-security-.git
-cd diploma-AI-security-
-
-# Установить зависимости
-pip install -r requirements.txt
-
-# Запустить Jupyter
-jupyter notebook analysis_diploma.ipynb
-```
-
-## 📊 Результаты внедрения
-
-В таблице представлено сравнение эффективности работы системы информационной безопасности до и после внедрения разработанных методических рекомендаций (на основе данных из параграфа 3.3.2 дипломной работы).
-
-| Показатель | До внедрения ИИ | После внедрения ИИ | Изменение |
-|------------|-----------------|-------------------|-----------|
-| **Количество инцидентов в месяц** | 47 | 52 | ▲ +10% |
-| **Выявлено внутренних нарушителей** | 3 | 8 | ▲ +166% |
-| **Среднее время обнаружения** | 4.5 часа | 0.5 часа | ▼ -89% |
-| **Доля ложных срабатываний** | 94% | 67% | ▼ -27% |
-| **Инциденты, выявленные только благодаря ИИ** | — | 6 | +6 |
-
-## 📈 Визуализация результатов
-
-![Сравнение до и после](comparison_chart.png)
 
 ## 📋 Пример данных (таблица 3.2)
 
@@ -239,15 +196,6 @@ python3 backend/app.py
 ![Аналитические графики в тёмном режиме](ai-security-platform/frontend/templates/IMG_4497.png)
 **Рисунок 8 — Аналитические графики в тёмном режиме**
 
-### 🧠 Соответствие дипломной работе
-
-Разработанное приложение — это не просто демонстрационный прототип, а практическая реализация ключевых положений исследования:
-
-*   **Подтверждение Таблицы 3.6** — при загрузке тестового датасета система находит аномалии с точностью, сопоставимой с результатами, описанными в параграфе 3.2.4.
-*   **Реализация принципа «человек в контуре»** — встроенный механизм обратной связи напрямую соответствует организационно-кадровым рекомендациям из параграфа 2.3.1.
-*   **Моделирование атак** — интерактивный симулятор трёх типов атак (инсайдер, фишинг, компрометация администратора) полностью соответствует сценариям пилотного проекта из параграфа 3.2.3 и демонстрирует работу алгоритмов в реальном времени.
-*   **Доказательство эффективности** — публично доступный сервис служит неоспоримым доказательством работоспособности предложенной методики и корректности программного кода.
-
 ## 📌 О работе
 
 **Институт информационных наук**  
@@ -263,31 +211,7 @@ python3 backend/app.py
 
 # Development of Methodological Recommendations for the Integration of Artificial Intelligence Technologies into an Information Security Management System
 
-This repository contains the materials developed during the Bachelor's thesis on integrating Artificial Intelligence into Information Security Management Systems (ISMS). It includes an analytical module based on Jupyter Notebook implementing anomaly detection algorithms, a Flask web application providing interactive access to the functionality, as well as synthetic test data, scripts, charts, and complete documentation. Detailed structure and setup instructions are provided in the relevant sections.
-
-## 🔬 Research Overview
-- **Objective:** Develop a novel methodology for integrating AI into security operations.
-- **Approach:** Behavioral profiling of privileged users using unsupervised machine learning techniques.
-- **Key Findings:**
-    - **27% reduction in false positives** compared to traditional SIEM rules.
-    - **89% faster incident detection time**, enabling more rapid response to potential threats.
-
-## 🛠 Implementation & Tech Stack
-- **Core Analysis:** Python (pandas, numpy, matplotlib, scikit-learn)
-- **Environment:** Jupyter Notebook for interactive exploration and reproducibility.
-- **Data:** Synthetic dataset mimicking privileged user behavior to ensure transparency and easy experimentation.
-
-## 📊 Implementation Results
-
-Comparison of information security system performance before and after the implementation of the developed methodological recommendations (based on data from Section 3.3.2 of the thesis).
-
-| Metric | Before AI | After AI | Change |
-|--------|-----------|----------|--------|
-| **Number of incidents per month** | 47 | 52 | ▲ +10% |
-| **Insider threats detected** | 3 | 8 | ▲ +166% |
-| **Average detection time** | 4.5 hours | 0.5 hours | ▼ -89% |
-| **False positive rate** | 94% | 67% | ▼ -27% |
-| **Incidents detected only by AI** | — | 6 | +6 |
+This repository contains the materials developed during the Bachelor's thesis on integrating Artificial Intelligence into Information Security Management Systems (ISMS).
 
 ## 📋 Sample Data (Table 3.2)
 
@@ -429,17 +353,6 @@ A key outcome of the practical part of the thesis was the development of a **ful
 The application is available in real-time at:  
 👉 **[https://diploma-ai-security.onrender.com](https://diploma-ai-security.onrender.com)**
 
-#### ✨ Functionality
-
-This tool fully implements the methodology described in Chapter 3 of the thesis, enabling users to:
-
-1.  **Upload data** — accepts CSV files with information security logs (structure matches Table 3.2 from the dissertation).
-2.  **Automatically build user profiles** — based on historical data, the system defines "normal" behavior for each employee (as in Table 3.4).
-3.  **Detect anomalies** — the algorithm analyzes uploaded events and finds deviations from typical behavior based on temporal, spatial, and intensity parameters.
-4.  **Visualize results** — users see summary statistics (total events, number of anomalies, anomaly percentage) and a detailed table of each suspicious event, including its type and severity level.
-5.  **Provide Human-in-the-loop feedback** — the interface allows analysts to manually verify each anomaly by selecting a verdict (incident, suspicious, false positive). This data is saved and can be used for future model retraining.
-6.  **Simulate attacks** — use the simulator panel to add synthetic anomalies and observe system response in real time
-
 ### 📸 Application Interface
 
 *Application interface after uploading and analyzing test data*
@@ -468,29 +381,6 @@ This tool fully implements the methodology described in Chapter 3 of the thesis,
 ![Analytics charts in dark mode](ai-security-platform/frontend/templates/IMG_4497.png)
 **Figure 8 — Analytics charts in dark mode**
 
-#### 💡 Connection to the Thesis
-
-This live application is not just a demonstration prototype but a practical implementation of the study's key findings:
-
-*   **Confirmation of Table 3.6** — when loading the test dataset, the system detects anomalies with accuracy comparable to the results described in section 3.2.4.
-*   **Implementation of the "Human-in-the-loop" principle** — the built-in feedback mechanism directly corresponds to the organizational and personnel recommendations from section 2.3.1.
-*   **Attack Simulation** — an interactive simulator of three types of attacks (insider, phishing, admin compromise) fully corresponds to the pilot project scenarios described in Section 3.2.3 and demonstrates the algorithms' operation in real time.
-*   **Proof of Effectiveness** — the publicly accessible service serves as undeniable evidence of the proposed methodology's viability and the correctness of the software code.
-
-## 🧠 Methodology Highlights
-
-This research includes both theoretical development and practical validation:
-
-- **Developed and validated** UEBA-based methodology for privileged user anomaly detection
-- **Created comprehensive anomaly typology** with 5 key types:
-  - *Temporal* — unusual working hours
-  - *Spatial* — access from unexpected locations
-  - *Resource* — access to unauthorized systems
-  - *Intensity* — abnormal data volumes
-  - *Behavioral* — unusual action sequences
-- **Experimental validation** on realistic enterprise dataset (Integra-Soft LLC)
-- **48 references** (2023-2026) including Russian and international research, GOST R ISO/IEC 27001 standards
-
 ## 📁 Repository Structure
 
 ### Root files:
@@ -517,35 +407,6 @@ This research includes both theoretical development and practical validation:
   - `sample_logs.csv` — Test dataset (Table 3.2 from the thesis)
 - **`requirements.txt`** — Web app dependencies (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
 
-## 🚀 Getting Started
-
-Follow these steps to run the analysis on your local machine.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Jane-byte-der/diploma-AI-security-.git
-    cd diploma-AI-security-
-    ```
-
-2.  **Install the required dependencies:**
-    It is highly recommended to do this within a virtual environment.
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **Launch Jupyter Notebook:**
-    ```bash
-    jupyter notebook analysis_diploma.ipynb
-    ```
-
-## 🎯 Why This Matters
-
-This research addresses the critical cybersecurity challenge of detecting insider threats and unknown attacks—sophisticated threats that often bypass traditional, signature-based security systems like SIEM. By leveraging AI for behavioral analysis, this work provides a pathway to more proactive and effective security monitoring.
-
-## 📄 Thesis
-
-The full text of the Bachelor's thesis (in Russian) is available here:  
-[📥 Download PDF](vorobeva_thesis_2026.pdf)
 
 ## 📌 About
 
