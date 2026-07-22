@@ -1,3 +1,10 @@
+# 🧠 AI Security Anomaly Detection Platform
+
+> Trilingual Documentation / 三语文档 / Трёхъязычная документация:  
+> 🇨🇳 中文 · 🇷🇺 Русский · 🇬🇧 English
+
+---
+
 ## 🇨🇳 中文文档 (Chinese Documentation)
 
 # 🧠 制定将人工智能技术融入信息安全管理系统的方法建议
