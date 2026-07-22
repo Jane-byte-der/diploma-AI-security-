@@ -301,6 +301,11 @@ Web应用程序采用经典的客户端-服务器架构，包含以下组件：F
 
 <br>
 <br>
+  
+---
+---
+
+## 🇷🇺 Русская версия
 
 # Дипломная работа: Разработка методических рекомендаций по интеграции технологий искусственного интеллекта в систему управления информационной безопасностью
 
@@ -512,6 +517,11 @@ python3 backend/app.py
 
 <br>
 <br>
+  
+---
+---
+
+## 🇬🇧 English Version
 
 # Development of Methodological Recommendations for the Integration of Artificial Intelligence Technologies into an Information Security Management System
 
