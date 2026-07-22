@@ -3,6 +3,20 @@
 > Trilingual Documentation / 三语文档 / Трёхъязычная документация:  
 > 🇨🇳 中文 · 🇷🇺 Русский · 🇬🇧 English
 
+<br>
+<br>
+<br>
+
+---
+---
+
+## Навигация / Navigation / 导航
+
+- 🇨🇳 [中文文档](#-中文文档)
+- 🇷🇺 [Русская версия](#-русская-версия)
+- 🇬🇧 [English Version](#-english-version)
+
+---
 ---
 
 ## 🇨🇳 中文文档 (Chinese Documentation)
