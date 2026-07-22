@@ -1,25 +1,31 @@
-## 中文文档 (Chinese Documentation)
+## 🇨🇳 中文文档 (Chinese Documentation)
 
-# 制定将人工智能技术融入信息安全管理系统的方法建议
+# 🧠 制定将人工智能技术融入信息安全管理系统的方法建议
 
 本仓库包含在毕业论文研究过程中开发的全部材料，旨在探索人工智能技术在信息安全管理体系（ISMS）中的整合方法。
 
-### Web应用程序 (ai-security-platform/):
-- backend/ — 基于 Flask 的后端服务
-  - init.py — 将文件夹标记为 Python 包（对导入至关重要）
-  - app.py — Web应用程序主文件 (Flask)
-  - anomaly_detector.py — 异常检测模块（系统核心）
-  - database.py — 使用 SQLite 存储反馈数据
-  - profile_generator.py — 用户聚类模块
-- frontend/ — 用户界面
-  - templates/index.html — 主页面
-  - static/style.css — 样式文件
-  - static/script.js — 客户端逻辑
-- data/ — 用于测试的合成数据
-  - sample_logs.csv — 测试数据集（论文中的表3.2）
-- requirements.txt — Web应用程序依赖项 (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
+---
 
-## 示例数据（表3.2）
+## 📦 项目结构
+
+### Web应用程序 (`ai-security-platform/`):
+- **`backend/`** — 基于 Flask 的后端服务
+  - `__init__.py` — 将文件夹标记为 Python 包（对导入至关重要）
+  - `app.py` — Web应用程序主文件 (Flask)
+  - `anomaly_detector.py` — 异常检测模块（系统核心）
+  - `database.py` — 使用 SQLite 存储反馈数据
+  - `profile_generator.py` — 用户聚类模块
+- **`frontend/`** — 用户界面
+  - `templates/index.html` — 主页面
+  - `static/style.css` — 样式文件
+  - `static/script.js` — 客户端逻辑
+- **`data/`** — 用于测试的合成数据
+  - `sample_logs.csv` — 测试数据集（论文中的表3.2）
+- **`requirements.txt`** — Web应用程序依赖项 (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
+
+---
+
+## 📊 示例数据（表3.2）
 
 用于分析的合成数据集片段：
 
@@ -28,27 +34,31 @@
 | 10.02.2026 09:15 | IVANOV_ADM  | 管理员 | LOGIN       | DC-01                            | 10.10.1.5     |              | 0          |
 | 10.02.2026 09:23 | PETROV_BUH  | 会计 | FILE_ACCESS | \\fs\\finance\\report.docx       | 10.10.2.10    | 120.0        | 0          |
 | 10.02.2026 10:01 | SIDOROV_DEV | 开发人员 | DB_QUERY    | test_db                          | 10.10.3.15    | 45.0         | 0          |
-| 10.02.2026 03:02 | IVANOV_ADM  | 管理员 | LOGIN       | DC-01                            | 185.124.33.12 |              | 1          |
-| 10.02.2026 03:15 | IVANOV_ADM  | 管理员 | DB_QUERY    | customer_db                      | 185.124.33.12 | 150000.0     | 1          |
-| 11.02.2026 14:30 | PETROV_BUH  | 会计 | FILE_ACCESS | \\fs\\develop\\source_code        | 10.10.2.10    | 5.0          | 1          |
-| 11.02.2026 09:45 | SMIRNOV_MGR | 经理 | WEB_ACCESS  | cloud-storage.ru/upload          | 10.10.5.20    | 25000.0      | 1          |
+| 10.02.2026 03:02 | IVANOV_ADM  | 管理员 | LOGIN       | DC-01                            | 185.124.33.12 |              | **1**          |
+| 10.02.2026 03:15 | IVANOV_ADM  | 管理员 | DB_QUERY    | customer_db                      | 185.124.33.12 | 150000.0     | **1**          |
+| 11.02.2026 14:30 | PETROV_BUH  | 会计 | FILE_ACCESS | \\fs\\develop\\source_code        | 10.10.2.10    | 5.0          | **1**          |
+| 11.02.2026 09:45 | SMIRNOV_MGR | 经理 | WEB_ACCESS  | cloud-storage.ru/upload          | 10.10.5.20    | 25000.0      | **1**          |
 | 11.02.2026 16:20 | IVANOV_ADM  | 管理员 | FILE_ACCESS | \\fs\\backup                      | 10.10.1.5     | 500.0        | 0          |
 | 11.02.2026 22:10 | PETROV_BUH  | 会计 | LOGIN       | FS-01                            | 10.10.2.10    |              | 0          |
-| 12.02.2026 08:55 | SIDOROV_DEV | 开发人员 | FILE_ACCESS | \\fs\\finance\\salaries.xlsx      | 10.10.3.15    | 2100.0       | 1          |
+| 12.02.2026 08:55 | SIDOROV_DEV | 开发人员 | FILE_ACCESS | \\fs\\finance\\salaries.xlsx      | 10.10.3.15    | 2100.0       | **1**          |
 
-### 在测试数据集上的验证
+---
+
+### ✅ 在测试数据集上的验证
 
 为了验证算法的正确性，我们在合成数据集（表3.2）上进行了测试：
-- 加载并处理了 10 条事件
-- 为 3 个用户 (IVANOV_ADM, PETROV_BUH, SIDOROV_DEV) 建立了行为画像
-- 检测到 6 个异常（与论文表3.6的数据相符）
-- 处理时间小于 1 秒，证明了实时处理能力
+- **加载并处理了 10 条事件**
+- **为 3 个用户** (IVANOV_ADM, PETROV_BUH, SIDOROV_DEV) 建立了行为画像
+- **检测到 6 个异常**（与论文表3.6的数据相符）
+- **处理时间小于 1 秒**，证明了实时处理能力
 
-## Web应用程序
+---
 
-本项目现包含一个完整的Web界面，用于实时检测安全日志中的异常。
+## 💻 Web应用程序
 
-### 本地启动
+本项目现包含一个**完整的Web界面**，用于实时检测安全日志中的异常。
+
+### 🚀 本地启动
 
 ```bash
 # 克隆仓库
@@ -66,144 +76,207 @@ pip install -r requirements.txt
 python3 backend/app.py
 ```
 
-### 功能描述
+---
 
-Web应用程序采用经典的客户端-服务器架构，包含以下组件：Flask后端、异常检测模块（anomaly_detector.py）、聚类模块（profile_generator.py）、用于存储反馈的SQLite数据库，以及基于HTML/CSS/JavaScript的前端。
+### ⚡ 功能描述
 
-功能特性：
+Web应用程序采用经典的客户端-服务器架构，包含以下组件：Flask后端、异常检测模块（`anomaly_detector.py`）、聚类模块（`profile_generator.py`）、用于存储反馈的SQLite数据库，以及基于HTML/CSS/JavaScript的前端。
 
-- 上传CSV数据，并自动验证必填列
-- 自动构建用户画像（典型工作时间、IP地址、数据量）
-- 五种类型的异常检测：时间（temporal）、空间（spatial）、资源（resource）、强度（intensity）、行为（behavioral）
-- 交互式结果表格，具有颜色编码的严重性等级（高、中、低、正常）
-- 人在回路（Human-in-the-loop）反馈机制，支持三种判决：安全事件（Incident）、可疑（Suspicious）、误报（False Positive）
-- 将所有反馈存入SQLite数据库，用于后续模型微调
-- 导出结果为CSV格式，便于进一步分析
+**功能特性：**
 
-表格交互功能：
+- 📁 **上传CSV数据**，并自动验证必填列
+- 👤 **自动构建用户画像**（典型工作时间、IP地址、数据量）
+- 🔍 **五种类型的异常检测**：时间（temporal）、空间（spatial）、资源（resource）、强度（intensity）、行为（behavioral）
+- 📊 **交互式结果表格**，具有颜色编码的严重性等级（高、中、低、正常）
+- 🔄 **人在回路（Human-in-the-loop）反馈机制**，支持三种判决：
+  - 🚨 **安全事件（Incident）**
+  - ⚠️ **可疑（Suspicious）**
+  - ✅ **误报（False Positive）**
+- 💾 **将所有反馈存入SQLite数据库**，用于后续模型微调
+- 📥 **导出结果为CSV格式**，便于进一步分析
 
-- 按用户搜索，输入框实时过滤表格行
-- 严重性过滤器，选择要显示的级别（高、中、正常）
-- 组合过滤，搜索和严重性过滤器协同工作，精确筛选结果
+---
 
-附加功能：
+### 🧩 表格交互功能
 
-- 加载示例（Load Example）按钮，一键加载测试数据集，无需下载文件即可立即测试应用程序功能。
+- 🔎 **按用户搜索** — 输入框实时过滤表格行
+- 🔽 **严重性过滤器** — 选择要显示的级别（高、中、正常）
+- ⚡ **组合过滤** — 搜索和严重性过滤器协同工作，精确筛选结果
 
-事件可视化：
+---
 
-分析图表：
-- 柱状图，按用户分布的事件，悬停显示精确数值
-- 饼图，检测到的异常类型（时间、空间、强度等），悬停显示详细信息
-- 图表在每次分析后自动生成，实时更新并支持交互式探索
+### ✨ 附加功能
 
-时间线：
-- 交互式时间线，每小时显示为一个独立的彩色区块
-- 颜色编码：红色表示异常活动，蓝色表示正常操作，灰色表示无事件记录
-- 动态高亮，异常集中的小时区块带有脉动动画
-- 自动摘要，时间线下方列出检测到异常的小时列表
+- ▶️ **加载示例（Load Example）按钮** — 一键加载测试数据集，无需下载文件即可立即测试应用程序功能。
 
-报告导出：
-- PDF报告，生成包含统计信息和异常表格的文档（前50条记录）
-- 内置行颜色编码：红色为高严重性，黄色为中严重性，绿色为正常
-- 点击「Download PDF Report」按钮一键下载报告
+---
 
-事件监控：
-- 通知面板，实时显示最近的系统事件
-- 红色通知为严重异常，黄色通知为可疑活动，绿色通知为信息类消息
-- 通知每5秒自动更新一次
-- 面板最多显示最近50条事件，包含时间戳、严重等级和详细信息
+### 🌈 事件可视化
 
-攻击模拟器：
-- 用于建模各种攻击场景的交互面板
-- 内部夜间攻击（Night Insider）添加3条异常，涉及大量数据访问（用户：IVANOV_ADM）
-- 钓鱼攻击（Phishing Campaign）添加3条异常，涉及可疑Web访问（用户：PETROV_BUH）
-- 管理员失陷（Admin Compromise）添加3条异常，涉及异常登录和批量查询（用户：SIDOROV_DEV）
-- 每次点击模拟器按钮，系统都会实时更新所有组件
+**分析图表：**
+- 📊 **柱状图** — 按用户分布的事件，悬停显示精确数值
+- 🥧 **饼图** — 检测到的异常类型（时间、空间、强度等），悬停显示详细信息
+- 📈 图表在每次分析后自动生成，实时更新并支持交互式探索
 
-动态更新：
+**时间线：**
+- 📊 **交互式时间线** — 每小时显示为一个独立的彩色区块
+- 🎨 **颜色编码**：
+  - 🔴 **红色** — 异常活动
+  - 🔵 **蓝色** — 正常操作
+  - ⚪ **灰色** — 无事件记录
+- ⚡ **动态高亮** — 异常集中的小时区块带有脉动动画
+- 📋 **自动摘要** — 时间线下方列出检测到异常的小时列表
+
+---
+
+### 📄 报告导出
+
+- 📄 **PDF报告** — 生成包含统计信息和异常表格的文档（前50条记录）
+- 🎨 内置行颜色编码：
+  - 🔴 **红色** — 高严重性
+  - 🟡 **黄色** — 中严重性
+  - 🟢 **绿色** — 正常
+- 点击 **「📄 Download PDF Report」** 按钮一键下载报告
+
+---
+
+### 📨 事件监控
+
+- 📨 **通知面板** — 实时显示最近的系统事件
+  - 🔴 **红色**通知 — 严重异常
+  - 🟡 **黄色**通知 — 可疑活动
+  - 🟢 **绿色**通知 — 信息类消息
+- 通知每 **5 秒** 自动更新一次
+- 面板最多显示最近 **50 条** 事件，包含时间戳、严重等级和详细信息
+
+---
+
+### 🔥 攻击模拟器
+
+用于建模各种攻击场景的交互面板：
+
+- 🚨 **内部夜间攻击（Night Insider）** — 添加 3 条异常，涉及大量数据访问（用户：IVANOV_ADM）
+- 🎣 **钓鱼攻击（Phishing Campaign）** — 添加 3 条异常，涉及可疑 Web 访问（用户：PETROV_BUH）
+- 👑 **管理员失陷（Admin Compromise）** — 添加 3 条异常，涉及异常登录和批量查询（用户：SIDOROV_DEV）
+
+> 💡 每次点击模拟器按钮，系统都会**实时更新所有组件**。
+
+---
+
+### 🔄 动态更新
+
 每次点击模拟器按钮，以下组件自动更新：
-- 统计数据（总事件数、异常数量、异常比例、受影响用户）
-- 表格（添加新行，包含完整数据：用户角色、IP类型、资源）
-- 图表（柱状图和饼图使用更新后的数据重新绘制）
-- 时间线（出现新的彩色区块）
-- 通知（面板中出现新记录）
+- 📊 **统计数据**（总事件数、异常数量、异常比例、受影响用户）
+- 📋 **表格**（添加新行，包含完整数据：用户角色、IP类型、资源）
+- 📈 **图表**（柱状图和饼图使用更新后的数据重新绘制）
+- 📉 **时间线**（出现新的彩色区块）
+- 📨 **通知**（面板中出现新记录）
 
-### 清空通知
+---
 
-- 通知面板中添加了「Clear All」按钮
+### 🗑️ 清空通知
+
+- 通知面板中添加了 **「Clear All」** 按钮
 - 一键删除数据库中的所有记录
 - 系统在删除前会要求确认
 
-### 自动数据库管理
+---
 
-- 数据库仅保留最新的100条通知
+### ⚖️ 自动数据库管理
+
+- 数据库仅保留最新的 **100 条** 通知
 - 添加新记录时自动删除旧记录
 - 这可以防止数据库无限增长并优化性能
 
-### 高精度时间戳
+---
 
-- 所有事件以毫秒精度保存
+### ⏱️ 高精度时间戳
+
+- 所有事件以**毫秒精度**保存
 - 即使在快速连续攻击期间也能确保正确的排序
 
-## 云端部署 (Render)
+---
 
-毕业论文实践部分的一个关键成果是开发了一个全功能的Web应用程序并将其部署在云环境中。该应用程序无需本地安装即可进行测试。
+## ☁️ 云端部署 (Render)
 
-### 在线访问地址
+毕业论文实践部分的一个关键成果是开发了**一个全功能的Web应用程序**并将其部署在云环境中。该应用程序无需本地安装即可进行测试。
 
-该应用程序支持实时访问：https://diploma-ai-security.onrender.com
+### 🔗 在线访问地址
 
-### 应用程序界面
+该应用程序支持实时访问：  
+👉 **[https://diploma-ai-security.onrender.com](https://diploma-ai-security.onrender.com)**
+
+---
+
+### 🖼️ 应用程序界面
 
 上传并分析测试数据后的应用程序界面：
 
-图1 — 应用程序主界面 (ai-security-platform/frontend/templates/IMG_4482.png)
-图2 — 工作区及统计面板和攻击模拟器 (ai-security-platform/frontend/templates/IMG_4486.png)
-图3 — 详细异常列表及验证选项 (ai-security-platform/frontend/templates/IMG_4414.png)
-图4 — 分析图表（柱状图和饼图）(ai-security-platform/frontend/templates/IMG_4415.png)
-图5 — 按小时粒度及颜色编码的交互式时间线 (ai-security-platform/frontend/templates/IMG_4420.png)
-图6 — 带颜色编码事件的通知面板 (ai-security-platform/frontend/templates/IMG_4492.png)
-图7 — 暗色模式下的应用程序界面 (ai-security-platform/frontend/templates/IMG_4502.png)
-图8 — 暗色模式下的分析图表 (ai-security-platform/frontend/templates/IMG_4497.png)
+![应用程序主界面](ai-security-platform/frontend/templates/IMG_4482.png)  
+**图1 — 应用程序主界面**
 
-## 仓库结构
+![工作区及统计面板和攻击模拟器](ai-security-platform/frontend/templates/IMG_4486.png)  
+**图2 — 工作区及统计面板和攻击模拟器**
 
-根目录文件：
-- analysis_diploma.ipynb — 完整数据分析的主Jupyter Notebook
-- requirements.txt — 数据分析的Python依赖项
-- runtime.txt — 固定Python版本（3.12.8），确保Render正确部署
-- .gitignore — Git配置文件
-- comparison_chart.png — 性能对比图（AI实施前后）
-- jupyter_analysis.png — 分析中的附加图表
-- create_chart.py — 用于生成对比图表的脚本
+![详细异常列表及验证选项](ai-security-platform/frontend/templates/IMG_4414.png)  
+**图3 — 详细异常列表及验证选项**
 
-Web应用程序 (ai-security-platform/):
-- backend/ — Flask服务端
-  - __init__.py — 将文件夹标记为Python包（对导入至关重要）
-  - app.py — Flask主应用程序文件
-  - anomaly_detector.py — 异常检测模块（系统核心）
-  - database.py — SQLite数据库操作，用于存储反馈
-  - profile_generator.py — 用户聚类模块
-- frontend/ — 用户界面
-  - templates/index.html — 主页面
-  - static/style.css — 样式文件
-  - static/script.js — 客户端逻辑
-- data/ — 合成测试数据
-  - sample_logs.csv — 测试数据集（论文中的表3.2）
-- requirements.txt — Web应用程序依赖项 (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
+![分析图表（柱状图和饼图）](ai-security-platform/frontend/templates/IMG_4415.png)  
+**图4 — 分析图表（柱状图和饼图）**
 
-## 关于本论文
+![按小时粒度及颜色编码的交互式时间线](ai-security-platform/frontend/templates/IMG_4420.png)  
+**图5 — 按小时粒度及颜色编码的交互式时间线**
 
-信息科学研究所
-国际信息安全教研室
-专业方向：10.03.01 — 信息安全
+![带颜色编码事件的通知面板](ai-security-platform/frontend/templates/IMG_4492.png)  
+**图6 — 带颜色编码事件的通知面板**
 
-本仓库是为完成本科毕业论文而创建的，论文题目为：
-"制定将人工智能技术融入信息安全管理系统的方法建议"
+![暗色模式下的应用程序界面](ai-security-platform/frontend/templates/IMG_4502.png)  
+**图7 — 暗色模式下的应用程序界面**
+
+![暗色模式下的分析图表](ai-security-platform/frontend/templates/IMG_4497.png)  
+**图8 — 暗色模式下的分析图表**
+
+---
+
+## 📁 仓库结构
+
+### 根目录文件：
+- `analysis_diploma.ipynb` — 完整数据分析的主Jupyter Notebook
+- `requirements.txt` — 数据分析的Python依赖项
+- `runtime.txt` — 固定Python版本（3.12.8），确保Render正确部署
+- `.gitignore` — Git配置文件
+- `comparison_chart.png` — 性能对比图（AI实施前后）
+- `jupyter_analysis.png` — 分析中的附加图表
+- `create_chart.py` — 用于生成对比图表的脚本
+
+### Web应用程序 (`ai-security-platform/`):
+- **`backend/`** — Flask服务端
+  - `__init__.py` — 将文件夹标记为Python包（对导入至关重要）
+  - `app.py` — Flask主应用程序文件
+  - `anomaly_detector.py` — 异常检测模块（系统核心）
+  - `database.py` — SQLite数据库操作，用于存储反馈
+  - `profile_generator.py` — 用户聚类模块
+- **`frontend/`** — 用户界面
+  - `templates/index.html` — 主页面
+  - `static/style.css` — 样式文件
+  - `static/script.js` — 客户端逻辑
+- **`data/`** — 合成测试数据
+  - `sample_logs.csv` — 测试数据集（论文中的表3.2）
+- **`requirements.txt`** — Web应用程序依赖项 (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
+
+---
+
+## 📌 关于本论文
+
+**信息科学研究所**  
+**国际信息安全教研室**  
+**专业方向：10.03.01 — 信息安全**
+
+本仓库是为完成本科毕业论文而创建的，论文题目为：  
+*"制定将人工智能技术融入信息安全管理系统的方法建议"*  
 （莫斯科国立语言大学，2026年）。
 
-作者：沃罗比约娃·叶夫根尼娅·亚历山德罗夫娜
+**作者：** 沃罗比约娃·叶夫根尼娅·亚历山德罗夫娜
 
 <br>
 <br>
