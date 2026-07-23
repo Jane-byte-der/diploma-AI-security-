@@ -1,6 +1,6 @@
 # 🧠 AI Security Anomaly Detection Platform
 
-> Trilingual Documentation / 三语文档 / Трёхъязычная документация:  
+> 三语文档 / Трёхъязычная документация / Trilingual Documentation:  
 > 🇨🇳 中文 · 🇷🇺 Русский · 🇬🇧 English
 
 <br>
