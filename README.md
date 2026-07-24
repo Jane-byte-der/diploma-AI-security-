@@ -3,6 +3,9 @@
 > 三语文档 / Трёхъязычная документация / Trilingual Documentation:  
 > 🇨🇳 中文 · 🇷🇺 Русский · 🇬🇧 English
 
+**Real-time anomaly detection in security logs using ML & behavioral analysis.**  
+Interactive web interface, attack simulation, and human-in-the-loop feedback.
+
 <br>
 
 ---
