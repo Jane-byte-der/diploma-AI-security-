@@ -271,17 +271,17 @@ Web应用程序采用经典的客户端-服务器架构，包含以下组件：F
 - `create_chart.py` — 用于生成对比图表的脚本
 
 ### Web应用程序 (`ai-security-platform/`):
-- **`backend/`** — Flask服务端
-  - `__init__.py` — 将文件夹标记为Python包（对导入至关重要）
-  - `app.py` — Flask主应用程序文件
+- **`backend/`** — 基于 Flask 的后端服务
+  - `__init__.py` — 将文件夹标记为 Python 包（对导入至关重要）
+  - `app.py` — Web应用程序主文件 (Flask)
   - `anomaly_detector.py` — 异常检测模块（系统核心）
-  - `database.py` — SQLite数据库操作，用于存储反馈
+  - `database.py` — 使用 SQLite 存储反馈数据
   - `profile_generator.py` — 用户聚类模块
 - **`frontend/`** — 用户界面
   - `templates/index.html` — 主页面
   - `static/style.css` — 样式文件
   - `static/script.js` — 客户端逻辑
-- **`data/`** — 合成测试数据
+- **`data/`** — 用于测试的合成数据
   - `sample_logs.csv` — 测试数据集（论文中的表3.2）
 - **`requirements.txt`** — Web应用程序依赖项 (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
 
