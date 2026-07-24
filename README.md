@@ -521,6 +521,8 @@ python3 backend/app.py
 
 Автор: Воробьева Евгения Александровна
 
+- **📄 Полный текст диплома (на русском языке):** [vorobeva_thesis_2026.pdf](vorobeva_thesis_2026.pdf)
+
 <br>
   
 ---
