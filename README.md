@@ -742,3 +742,5 @@ This repository was created as part of the Bachelor's thesis on
 (Moscow State Linguistic University, 2026).
 
 **Author:** Evgeniia Vorobeva
+
+- **📄 Full thesis text (in Russian):** [vorobeva_thesis_2026.pdf](vorobeva_thesis_2026.pdf)
