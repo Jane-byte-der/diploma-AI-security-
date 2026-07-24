@@ -7,11 +7,11 @@
 
 **🤖 AI-powered security log analysis**
 
-🔍 Real-time anomaly detection  
-📊 Behavioral profiling  
-🎯 Attack simulation  
-🔄 Human-in-the-loop feedback  
-📈 Interactive visualizations
+- 🔍 Real-time anomaly detection
+- 📊 Behavioral profiling
+- 🎯 Attack simulation
+- 🔄 Human-in-the-loop feedback
+- 📈 Interactive visualizations
 
 <br>
 
