@@ -5,8 +5,9 @@
 
 <br>
 
-**Real-time anomaly detection in security logs using ML & behavioral analysis.**  
-Interactive web interface, attack simulation, and human-in-the-loop feedback.
+**🤖 AI-powered security log analysis**  
+🔍 Real-time anomaly detection · 📊 Behavioral profiling · 🎯 Attack simulation  
+🔄 Human-in-the-loop feedback · 📈 Interactive visualizations
 
 <br>
 
