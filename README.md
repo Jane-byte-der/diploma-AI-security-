@@ -492,6 +492,33 @@ python3 backend/app.py
 ![Аналитические графики в тёмном режиме](ai-security-platform/frontend/templates/IMG_4497.png)
 **Рисунок 8 — Аналитические графики в тёмном режиме**
 
+## 📁 Структура репозитория
+
+### Корневые файлы:
+- `analysis_diploma.ipynb` — основной Jupyter Notebook с полным анализом данных
+- `requirements.txt` — зависимости Python для анализа
+- `runtime.txt` — фиксация версии Python (3.12.8) для корректного развёртывания на Render
+- `.gitignore` — файл конфигурации Git
+- `comparison_chart.png` — график сравнения эффективности (до и после внедрения ИИ)
+- `jupyter_analysis.png` — дополнительные графики из анализа
+- `create_chart.py` — скрипт для генерации графика сравнения
+
+### Веб-приложение (`ai-security-platform/`):
+- **`backend/`** — серверная часть на Flask
+  - `__init__.py` — пустой файл, делающий папку Python-пакетом (критически важно для импортов)
+  - `app.py` — главный файл веб-приложения (Flask)
+  - `anomaly_detector.py` — модуль обнаружения аномалий (ядро системы)
+  - `database.py` — работа с SQLite для хранения обратной связи
+  - `profile_generator.py` — модуль кластеризации пользователей
+- **`frontend/`** — пользовательский интерфейс
+  - `templates/index.html` — главная страница
+  - `static/style.css` — стили
+  - `static/script.js` — логика на клиенте
+- **`data/`** — синтетические данные для тестирования
+  - `sample_logs.csv` — тестовый датасет (таблица 3.2 из диплома)
+- **`requirements.txt`** — зависимости для веб-приложения (flask, pandas, numpy, scikit-learn, matplotlib, gunicorn)
+
+
 ## 📌 О работе
 
 **Институт информационных наук**  
